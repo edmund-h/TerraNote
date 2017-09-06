@@ -17,7 +17,7 @@ class TNViewFormatter {
         cell.detailTextLabel?.textColor = UIColor.chocolate
     }
     
-    class func formatTextField (_ field: UITextField){
+    class func formatView (_ field: UIView){
         field.layer.borderWidth = 3
         field.layer.cornerRadius = 9
         field.layer.borderColor = UIColor.chocolate.cgColor

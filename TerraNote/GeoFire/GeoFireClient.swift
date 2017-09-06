@@ -24,7 +24,7 @@ final class GeoFireClient {
         return GeoFire(firebaseRef: firebase.child("locations"))
     }
     
-    class func addLocation(note id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
+    class func addLocation(noteID id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
         let loc  = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         geo.setLocation(loc, forKey: id, withCompletionBlock:{ error in
             NSLog("%@", "added location at (\(coordinate.latitude), \(coordinate.longitude) ")
@@ -47,7 +47,7 @@ final class GeoFireClient {
         })
     }
     
-    class func removeFromLocationId(note id: String, completion: @escaping (Bool)->()){
+    class func removeFromLocationId(noteID id: String, completion: @escaping (Bool)->()){
         geo.removeKey(id, withCompletionBlock: { error in
             completion(error == nil)
         })

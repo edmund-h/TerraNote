@@ -13,6 +13,7 @@ import GoogleSignIn
 class TNMapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var addButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,9 @@ class TNMapViewController: UIViewController {
         mapView.isRotateEnabled = false
         mapView.showsPointsOfInterest = false
         mapView.setUserTrackingMode(.follow, animated: true)
+        
+        addButton.layer.cornerRadius = 19
+        
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.title = "TerraNote"
     }

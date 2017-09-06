@@ -52,7 +52,7 @@ extension TNSignInController: GIDSignInDelegate {
                 let emailSeparated = email.components(separatedBy: ".")
                 let emailStr = emailSeparated[0]
                 UserDefaults.standard.setValue(emailStr, forKey: "uid")
-                FirebaseClient.makeTestData()
+                //FirebaseClient.makeTestData()
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: nil)
                 }

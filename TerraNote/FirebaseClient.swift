@@ -97,7 +97,7 @@ class FirebaseClient {
             let id = pushNew(note: newNote)
             
             // push location up to geofire at id
-            GeoFireClient.addLocation(note: id, coordinate: myCoord)
+            GeoFireClient.addLocation(noteID: id, coordinate: myCoord)
         }
     }
 }

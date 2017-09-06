@@ -69,4 +69,19 @@ final class CoreLocClient{
         })
         
     }
+    
+    class func geocodeMyLocation(completion: @escaping (CLPlacemark?)->()){
+        let geocoder = CLGeocoder()
+        if let location = client.manager.location {
+            geocoder.reverseGeocodeLocation(location){ placemarks, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                if let placemarks = placemarks{
+                    completion(placemarks.first)
+                }
+                else { completion (nil) }
+            }
+        }
+    }
 }
