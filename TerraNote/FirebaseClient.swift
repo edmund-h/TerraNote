@@ -11,7 +11,13 @@ import Firebase
 
 class FirebaseClient {
     
-    fileprivate static let firebase = Database.database().reference().child("notes")
+    fileprivate static var firebase: DatabaseReference {
+        let ref = Database.database().reference()
+        if let uid = UserDefaults.standard.string(forKey: "uid"){
+            return ref.child(uid).child("notes")
+        }
+        return ref.child("unloggedInUser").child("notes")
+    }
     
     typealias JSON = [String:Any]
     
@@ -78,9 +84,9 @@ class FirebaseClient {
             let date =  Date(timeIntervalSinceNow: interval)
             let dateStr = ISO8601DateFormatter().string(from: date)
             let myCoord = CLLocationCoordinate2DMake(
-                37.784991 - x,
-                -122.407326 - y
-            )   //should be somewhere in San Francisco or nearby
+                37.332000 - x,
+                -122.032969 - y
+            )   //should be near apple HQ
             
             print ("MAKING: \(myCoord)")
             

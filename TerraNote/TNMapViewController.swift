@@ -20,6 +20,7 @@ class TNMapViewController: UIViewController {
         mapView.delegate = self
         mapView.isRotateEnabled = false
         mapView.showsPointsOfInterest = false
+        mapView.setUserTrackingMode(.follow, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -27,7 +28,6 @@ class TNMapViewController: UIViewController {
             let signIn = TNSignInController(nibName: "TNSignInController", bundle: Bundle.main)
             self.present(signIn, animated: false, completion: nil)
         } else {
-            mapView.setUserTrackingMode(.follow, animated: true)
             
         }
     }

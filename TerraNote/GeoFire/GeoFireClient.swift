@@ -13,11 +13,20 @@ final class GeoFireClient {
     
     private static var query: GFRegionQuery?
     
-    static let geo = GeoFire(firebaseRef: Database.database().reference().child("locations"))
+    fileprivate static var geo: GeoFire{
+        var firebase: DatabaseReference {
+            let ref = Database.database().reference()
+            if let uid = UserDefaults.standard.string(forKey: "uid"){
+                return ref.child(uid)
+            }
+            return ref.child("unloggedInUser")
+        }
+        return GeoFire(firebaseRef: firebase.child("locations"))
+    }
     
     class func addLocation(note id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
         let loc  = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        geo?.setLocation(loc, forKey: id, withCompletionBlock:{ error in
+        geo.setLocation(loc, forKey: id, withCompletionBlock:{ error in
             NSLog("%@", "added location at (\(coordinate.latitude), \(coordinate.longitude) ")
             if let error = error{ print (error.localizedDescription) }
             if let completion = completion {completion()}
@@ -27,10 +36,10 @@ final class GeoFireClient {
     
     class func queryLocations(within region: MKCoordinateRegion, response: @escaping (String, CLLocation)->()){
         //remove locations from map first!
-        GeoFireClient.query = geo?.query(with: region)
+        GeoFireClient.query = geo.query(with: region)
         guard let query = GeoFireClient.query else {return}
         query.observe(.keyEntered, with: { key, location in
-            //key is note id
+            //key is game id
             //location is CLLocation
             guard let location = location
                 , let key = key else { return }
@@ -39,7 +48,7 @@ final class GeoFireClient {
     }
     
     class func removeFromLocationId(note id: String, completion: @escaping (Bool)->()){
-        geo?.removeKey(id, withCompletionBlock: { error in
+        geo.removeKey(id, withCompletionBlock: { error in
             completion(error == nil)
         })
     }
