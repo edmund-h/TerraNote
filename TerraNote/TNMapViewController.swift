@@ -42,8 +42,20 @@ class TNMapViewController: UIViewController {
 
 extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
-        return annotationView
+        if annotation is MKPlacemark {
+            let identifier = "Placemark"
+            var annotationView: MKPinAnnotationView
+            if let rawAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView{
+                annotationView = rawAnnotationView
+                annotationView.annotation = annotation
+            } else {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                //set up callout options etc here
+            }
+            // further setup here
+            return annotationView
+        }
+        return nil
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
