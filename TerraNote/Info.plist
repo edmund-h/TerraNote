@@ -39,6 +39,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<string>NO</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>location-services</string>

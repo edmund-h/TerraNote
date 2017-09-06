@@ -20,8 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         CoreLocClient.authCheckRequest()
-        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        let navigationBarAppearance = UINavigationBar.appearance()
+        // Make Nav bar brown with white buttons and text
+        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.barTintColor = UIColor.chocolate
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
         return true
     }
 

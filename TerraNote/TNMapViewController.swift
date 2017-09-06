@@ -13,7 +13,7 @@ import GoogleSignIn
 class TNMapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,6 +21,8 @@ class TNMapViewController: UIViewController {
         mapView.isRotateEnabled = false
         mapView.showsPointsOfInterest = false
         mapView.setUserTrackingMode(.follow, animated: true)
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.title = "TerraNote"
     }
     
     override func viewDidAppear(_ animated: Bool) {
