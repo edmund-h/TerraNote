@@ -12,6 +12,7 @@ import GoogleSignIn
 
 class TNSignInController: UIViewController, GIDSignInUIDelegate {
     
+    @IBOutlet weak var googleButton: GIDSignInButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,13 @@ class TNSignInController: UIViewController, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().shouldFetchBasicProfile  = true
-        GIDSignIn.sharedInstance().signIn()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
 }
 
@@ -41,7 +48,10 @@ extension TNSignInController: GIDSignInDelegate {
                 print(error.localizedDescription)
                 return
             }
-            self.dismiss(animated: false, completion: nil)
+            FirebaseClient.makeTestData()
+            DispatchQueue.main.async {
+                self.dismiss(animated: false, completion: nil)
+            }
         }
     }
     

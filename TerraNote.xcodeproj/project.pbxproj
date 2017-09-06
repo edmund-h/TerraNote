@@ -24,6 +24,7 @@
 		88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */; };
 		88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBA31F5F990600F55603 /* FirebaseClient.swift */; };
 		88D0DBA81F5F9E3200F55603 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBA71F5F9E3200F55603 /* Model.swift */; };
+		88D0DBAA1F5FBCD900F55603 /* TNSignInController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DBA91F5FBCD900F55603 /* TNSignInController.xib */; };
 		CE4EA319B8AA5D7134BF48DF /* Pods_TerraNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0118F498835A7061184082FB /* Pods_TerraNote.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSignInController.swift; sourceTree = "<group>"; };
 		88D0DBA31F5F990600F55603 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		88D0DBA71F5F9E3200F55603 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		88D0DBA91F5FBCD900F55603 /* TNSignInController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TNSignInController.xib; sourceTree = "<group>"; };
 		D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -120,18 +122,19 @@
 		88D0DB611F5F7C0F00F55603 /* TerraNote */ = {
 			isa = PBXGroup;
 			children = (
-				88D0DB851F5F7D6C00F55603 /* GeoFire */,
 				88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */,
 				88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */,
 				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
 				88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */,
+				88D0DBA31F5F990600F55603 /* FirebaseClient.swift */,
+				88D0DBA71F5F9E3200F55603 /* Model.swift */,
 				88D0DB661F5F7C0F00F55603 /* Main.storyboard */,
 				88D0DB6C1F5F7C0F00F55603 /* Assets.xcassets */,
 				88D0DB6E1F5F7C0F00F55603 /* LaunchScreen.storyboard */,
 				88D0DB711F5F7C0F00F55603 /* Info.plist */,
 				88D0DB9D1F5F7E8200F55603 /* GoogleService-Info.plist */,
-				88D0DBA31F5F990600F55603 /* FirebaseClient.swift */,
-				88D0DBA71F5F9E3200F55603 /* Model.swift */,
+				88D0DB851F5F7D6C00F55603 /* GeoFire */,
+				88D0DBA91F5FBCD900F55603 /* TNSignInController.xib */,
 			);
 			path = TerraNote;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				88D0DB9E1F5F7E8200F55603 /* GoogleService-Info.plist in Resources */,
 				88D0DB6D1F5F7C0F00F55603 /* Assets.xcassets in Resources */,
 				88D0DB681F5F7C0F00F55603 /* Main.storyboard in Resources */,
+				88D0DBAA1F5FBCD900F55603 /* TNSignInController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

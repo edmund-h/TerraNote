@@ -13,7 +13,7 @@ final class GeoFireClient {
     
     private static var query: GFRegionQuery?
     
-    static let geo = GeoFire(firebaseRef: Database.database().reference().child("").child("locations"))
+    static let geo = GeoFire(firebaseRef: Database.database().reference().child("locations"))
     
     class func addLocation(note id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
         let loc  = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -30,7 +30,7 @@ final class GeoFireClient {
         GeoFireClient.query = geo?.query(with: region)
         guard let query = GeoFireClient.query else {return}
         query.observe(.keyEntered, with: { key, location in
-            //key is game id
+            //key is note id
             //location is CLLocation
             guard let location = location
                 , let key = key else { return }

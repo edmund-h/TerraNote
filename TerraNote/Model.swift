@@ -10,14 +10,23 @@ import Foundation
 
 struct TNNote {
     let id: String
-    var name: String
+    var title: String
     var date: String
     var location: String
     var content: String
     
+    var values: [String:String] {
+        return [
+            TNNote.meta.title : self.title,
+            TNNote.meta.date : self.date,
+            TNNote.meta.location: self.location,
+            TNNote.meta.content: self.content
+        ]
+    }
+    
     static let meta =
         TNNote(id: TNProperty.id.rawValue,
-               name: TNProperty.name.rawValue,
+               title: TNProperty.title.rawValue,
                date: TNProperty.date.rawValue,
                location: TNProperty.location.rawValue,
                content: TNProperty.content.rawValue)
@@ -36,11 +45,11 @@ struct TNNote {
     
     static func makeWith(id: String, data: [String:Any])->TNNote? {
         
-       if let name = data[meta.name] as? String,
+       if let title = data[meta.title] as? String,
         let date = data[meta.date] as? String,
         let location = data[meta.location] as? String,
         let content = data[meta.content] as? String{
-            return TNNote(id: id, name: name, date: date, location: location, content: content)
+            return TNNote(id: id, title: title, date: date, location: location, content: content)
         }
         return nil
     }
@@ -48,7 +57,7 @@ struct TNNote {
 
 enum TNProperty: String {
     case id = "id"
-    case name = "name"
+    case title = "title"
     case date = "date"
     case location = "location"
     case content = "content"
