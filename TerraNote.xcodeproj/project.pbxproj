@@ -7,13 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B13B1F633A00FE297D3C323 /* Pods_TerraNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */; };
 		88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */; };
-		88D0DB651F5F7C0F00F55603 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB641F5F7C0F00F55603 /* ViewController.swift */; };
+		88D0DB651F5F7C0F00F55603 /* TNMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */; };
 		88D0DB681F5F7C0F00F55603 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB661F5F7C0F00F55603 /* Main.storyboard */; };
-		88D0DB6B1F5F7C0F00F55603 /* TerraNote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB691F5F7C0F00F55603 /* TerraNote.xcdatamodeld */; };
 		88D0DB6D1F5F7C0F00F55603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB6C1F5F7C0F00F55603 /* Assets.xcassets */; };
 		88D0DB701F5F7C0F00F55603 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB6E1F5F7C0F00F55603 /* LaunchScreen.storyboard */; };
 		88D0DB7B1F5F7C1000F55603 /* TerraNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB7A1F5F7C1000F55603 /* TerraNoteTests.swift */; };
+		88D0DB971F5F7DB700F55603 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB891F5F7DB700F55603 /* GeoFire.m */; };
+		88D0DB981F5F7DB700F55603 /* GeoFireClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */; };
+		88D0DB991F5F7DB700F55603 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB8D1F5F7DB700F55603 /* GFBase32Utils.m */; };
+		88D0DB9A1F5F7DB700F55603 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB901F5F7DB700F55603 /* GFGeoHash.m */; };
+		88D0DB9B1F5F7DB700F55603 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB921F5F7DB700F55603 /* GFGeoHashQuery.m */; };
+		88D0DB9C1F5F7DB700F55603 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB941F5F7DB700F55603 /* GFQuery.m */; };
+		88D0DB9E1F5F7E8200F55603 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB9D1F5F7E8200F55603 /* GoogleService-Info.plist */; };
+		88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */; };
+		88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBA31F5F990600F55603 /* FirebaseClient.swift */; };
+		88D0DBA81F5F9E3200F55603 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBA71F5F9E3200F55603 /* Model.swift */; };
+		CE4EA319B8AA5D7134BF48DF /* Pods_TerraNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0118F498835A7061184082FB /* Pods_TerraNote.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +38,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0118F498835A7061184082FB /* Pods_TerraNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A0C961FF5C68A03B12C960F /* Pods-TerraNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.debug.xcconfig"; sourceTree = "<group>"; };
+		416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.release.xcconfig"; sourceTree = "<group>"; };
+		46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.release.xcconfig"; sourceTree = "<group>"; };
+		675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		88D0DB5F1F5F7C0F00F55603 /* TerraNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerraNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		88D0DB641F5F7C0F00F55603 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMapViewController.swift; sourceTree = "<group>"; };
 		88D0DB671F5F7C0F00F55603 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		88D0DB6A1F5F7C0F00F55603 /* TerraNote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerraNote.xcdatamodel; sourceTree = "<group>"; };
 		88D0DB6C1F5F7C0F00F55603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88D0DB6F1F5F7C0F00F55603 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88D0DB711F5F7C0F00F55603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D0DB761F5F7C1000F55603 /* TerraNoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerraNoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D0DB7A1F5F7C1000F55603 /* TerraNoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerraNoteTests.swift; sourceTree = "<group>"; };
 		88D0DB7C1F5F7C1000F55603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D0DB861F5F7DB700F55603 /* TerraNote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TerraNote-Bridging-Header.h"; sourceTree = "<group>"; };
+		88D0DB871F5F7DB700F55603 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GeoFire-Prefix.pch"; path = "GeoFire/GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		88D0DB881F5F7DB700F55603 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoFire.h; path = GeoFire/GeoFire.h; sourceTree = "<group>"; };
+		88D0DB891F5F7DB700F55603 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoFire.m; path = GeoFire/GeoFire.m; sourceTree = "<group>"; };
+		88D0DB8A1F5F7DB700F55603 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GeoFire+Private.h"; path = "GeoFire/GeoFire+Private.h"; sourceTree = "<group>"; };
+		88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoFireClient.swift; path = GeoFire/GeoFireClient.swift; sourceTree = "<group>"; };
+		88D0DB8C1F5F7DB700F55603 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFBase32Utils.h; path = GeoFire/GFBase32Utils.h; sourceTree = "<group>"; };
+		88D0DB8D1F5F7DB700F55603 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFBase32Utils.m; path = GeoFire/GFBase32Utils.m; sourceTree = "<group>"; };
+		88D0DB8E1F5F7DB700F55603 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFCircleQuery.h; path = GeoFire/GFCircleQuery.h; sourceTree = "<group>"; };
+		88D0DB8F1F5F7DB700F55603 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeoHash.h; path = GeoFire/GFGeoHash.h; sourceTree = "<group>"; };
+		88D0DB901F5F7DB700F55603 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeoHash.m; path = GeoFire/GFGeoHash.m; sourceTree = "<group>"; };
+		88D0DB911F5F7DB700F55603 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFGeoHashQuery.h; path = GeoFire/GFGeoHashQuery.h; sourceTree = "<group>"; };
+		88D0DB921F5F7DB700F55603 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFGeoHashQuery.m; path = GeoFire/GFGeoHashQuery.m; sourceTree = "<group>"; };
+		88D0DB931F5F7DB700F55603 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFQuery.h; path = GeoFire/GFQuery.h; sourceTree = "<group>"; };
+		88D0DB941F5F7DB700F55603 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFQuery.m; path = GeoFire/GFQuery.m; sourceTree = "<group>"; };
+		88D0DB951F5F7DB700F55603 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GFQuery+Private.h"; path = "GeoFire/GFQuery+Private.h"; sourceTree = "<group>"; };
+		88D0DB961F5F7DB700F55603 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFRegionQuery.h; path = GeoFire/GFRegionQuery.h; sourceTree = "<group>"; };
+		88D0DB9D1F5F7E8200F55603 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSignInController.swift; sourceTree = "<group>"; };
+		88D0DBA31F5F990600F55603 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
+		88D0DBA71F5F9E3200F55603 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4EA319B8AA5D7134BF48DF /* Pods_TerraNote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B13B1F633A00FE297D3C323 /* Pods_TerraNoteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +103,8 @@
 				88D0DB611F5F7C0F00F55603 /* TerraNote */,
 				88D0DB791F5F7C1000F55603 /* TerraNoteTests */,
 				88D0DB601F5F7C0F00F55603 /* Products */,
+				CB8F9B0A24CFF0AF3413272E /* Pods */,
+				B3F4875495169F83A1EB3C64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,13 +120,18 @@
 		88D0DB611F5F7C0F00F55603 /* TerraNote */ = {
 			isa = PBXGroup;
 			children = (
+				88D0DB851F5F7D6C00F55603 /* GeoFire */,
 				88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */,
-				88D0DB641F5F7C0F00F55603 /* ViewController.swift */,
+				88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */,
+				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
+				88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */,
 				88D0DB661F5F7C0F00F55603 /* Main.storyboard */,
 				88D0DB6C1F5F7C0F00F55603 /* Assets.xcassets */,
 				88D0DB6E1F5F7C0F00F55603 /* LaunchScreen.storyboard */,
 				88D0DB711F5F7C0F00F55603 /* Info.plist */,
-				88D0DB691F5F7C0F00F55603 /* TerraNote.xcdatamodeld */,
+				88D0DB9D1F5F7E8200F55603 /* GoogleService-Info.plist */,
+				88D0DBA31F5F990600F55603 /* FirebaseClient.swift */,
+				88D0DBA71F5F9E3200F55603 /* Model.swift */,
 			);
 			path = TerraNote;
 			sourceTree = "<group>";
@@ -99,6 +145,49 @@
 			path = TerraNoteTests;
 			sourceTree = "<group>";
 		};
+		88D0DB851F5F7D6C00F55603 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				88D0DB871F5F7DB700F55603 /* GeoFire-Prefix.pch */,
+				88D0DB881F5F7DB700F55603 /* GeoFire.h */,
+				88D0DB891F5F7DB700F55603 /* GeoFire.m */,
+				88D0DB8A1F5F7DB700F55603 /* GeoFire+Private.h */,
+				88D0DB8C1F5F7DB700F55603 /* GFBase32Utils.h */,
+				88D0DB8D1F5F7DB700F55603 /* GFBase32Utils.m */,
+				88D0DB8E1F5F7DB700F55603 /* GFCircleQuery.h */,
+				88D0DB8F1F5F7DB700F55603 /* GFGeoHash.h */,
+				88D0DB901F5F7DB700F55603 /* GFGeoHash.m */,
+				88D0DB911F5F7DB700F55603 /* GFGeoHashQuery.h */,
+				88D0DB921F5F7DB700F55603 /* GFGeoHashQuery.m */,
+				88D0DB931F5F7DB700F55603 /* GFQuery.h */,
+				88D0DB941F5F7DB700F55603 /* GFQuery.m */,
+				88D0DB951F5F7DB700F55603 /* GFQuery+Private.h */,
+				88D0DB961F5F7DB700F55603 /* GFRegionQuery.h */,
+				88D0DB861F5F7DB700F55603 /* TerraNote-Bridging-Header.h */,
+			);
+			name = GeoFire;
+			sourceTree = "<group>";
+		};
+		B3F4875495169F83A1EB3C64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0118F498835A7061184082FB /* Pods_TerraNote.framework */,
+				D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB8F9B0A24CFF0AF3413272E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A0C961FF5C68A03B12C960F /* Pods-TerraNote.debug.xcconfig */,
+				416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */,
+				675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */,
+				46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88D0DB7F1F5F7C1000F55603 /* Build configuration list for PBXNativeTarget "TerraNote" */;
 			buildPhases = (
+				CC3AF2B642E0541DA8CBE330 /* [CP] Check Pods Manifest.lock */,
 				88D0DB5B1F5F7C0F00F55603 /* Sources */,
 				88D0DB5C1F5F7C0F00F55603 /* Frameworks */,
 				88D0DB5D1F5F7C0F00F55603 /* Resources */,
+				860198E01BC2ABC84D54DCFC /* [CP] Embed Pods Frameworks */,
+				DD2E70F301BF6E638A44CD57 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,9 +215,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88D0DB821F5F7C1000F55603 /* Build configuration list for PBXNativeTarget "TerraNoteTests" */;
 			buildPhases = (
+				E7DE5F2F086B1BC089E2CC9C /* [CP] Check Pods Manifest.lock */,
 				88D0DB721F5F7C1000F55603 /* Sources */,
 				88D0DB731F5F7C1000F55603 /* Frameworks */,
 				88D0DB741F5F7C1000F55603 /* Resources */,
+				07D801B4F98A69BAFBA68E62 /* [CP] Embed Pods Frameworks */,
+				EB51DBEE2C3A1D9D0DF641F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,6 +245,7 @@
 					88D0DB5E1F5F7C0F00F55603 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = H7DR849HVE;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					88D0DB751F5F7C1000F55603 = {
@@ -185,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D0DB701F5F7C0F00F55603 /* LaunchScreen.storyboard in Resources */,
+				88D0DB9E1F5F7E8200F55603 /* GoogleService-Info.plist in Resources */,
 				88D0DB6D1F5F7C0F00F55603 /* Assets.xcassets in Resources */,
 				88D0DB681F5F7C0F00F55603 /* Main.storyboard in Resources */,
 			);
@@ -199,13 +296,114 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07D801B4F98A69BAFBA68E62 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		860198E01BC2ABC84D54DCFC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC3AF2B642E0541DA8CBE330 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DD2E70F301BF6E638A44CD57 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7DE5F2F086B1BC089E2CC9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB51DBEE2C3A1D9D0DF641F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		88D0DB5B1F5F7C0F00F55603 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88D0DB6B1F5F7C0F00F55603 /* TerraNote.xcdatamodeld in Sources */,
-				88D0DB651F5F7C0F00F55603 /* ViewController.swift in Sources */,
+				88D0DB981F5F7DB700F55603 /* GeoFireClient.swift in Sources */,
+				88D0DB991F5F7DB700F55603 /* GFBase32Utils.m in Sources */,
+				88D0DB971F5F7DB700F55603 /* GeoFire.m in Sources */,
+				88D0DB651F5F7C0F00F55603 /* TNMapViewController.swift in Sources */,
+				88D0DB9B1F5F7DB700F55603 /* GFGeoHashQuery.m in Sources */,
+				88D0DBA81F5F9E3200F55603 /* Model.swift in Sources */,
+				88D0DB9C1F5F7DB700F55603 /* GFQuery.m in Sources */,
+				88D0DB9A1F5F7DB700F55603 /* GFGeoHash.m in Sources */,
+				88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */,
+				88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */,
 				88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,32 +543,40 @@
 		};
 		88D0DB801F5F7C1000F55603 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0C961FF5C68A03B12C960F /* Pods-TerraNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = H7DR849HVE;
 				INFOPLIST_FILE = TerraNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bdl.TerraNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TerraNote/TerraNote-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		88D0DB811F5F7C1000F55603 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = H7DR849HVE;
 				INFOPLIST_FILE = TerraNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bdl.TerraNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TerraNote/TerraNote-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		88D0DB831F5F7C1000F55603 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -386,6 +592,7 @@
 		};
 		88D0DB841F5F7C1000F55603 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -418,6 +625,7 @@
 				88D0DB811F5F7C1000F55603 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88D0DB821F5F7C1000F55603 /* Build configuration list for PBXNativeTarget "TerraNoteTests" */ = {
 			isa = XCConfigurationList;
@@ -426,21 +634,9 @@
 				88D0DB841F5F7C1000F55603 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		88D0DB691F5F7C0F00F55603 /* TerraNote.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				88D0DB6A1F5F7C0F00F55603 /* TerraNote.xcdatamodel */,
-			);
-			currentVersion = 88D0DB6A1F5F7C0F00F55603 /* TerraNote.xcdatamodel */;
-			path = TerraNote.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 88D0DB571F5F7C0F00F55603 /* Project object */;
 }
