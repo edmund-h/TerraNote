@@ -48,8 +48,8 @@ class TNMapViewController: UIViewController {
 
 extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKPlacemark {
-            let identifier = "Placemark"
+        if annotation is TNAnnotation {
+            let identifier = "TNAnnotation"
             var annotationView: MKPinAnnotationView
             if let rawAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView{
                 annotationView = rawAnnotationView
@@ -57,19 +57,44 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 //set up callout options etc here
+                annotationView.canShowCallout = true
+                let btn = UIButton(type: .detailDisclosure)
+                //let label = UILabel()
+                annotationView.rightCalloutAccessoryView = btn
+                //annotationView.leftCalloutAccessoryView = label
             }
             // further setup here
+            annotationView.pinTintColor = UIColor.chocolate
             return annotationView
         }
         return nil
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         
         GeoFireClient.queryLocations(within: mapView.region, response: { (id, loc) in
-            let placemark = MKPlacemark(coordinate: loc.coordinate)
+            let placemark = TNAnnotation(coordinate: loc.coordinate, noteID: id)
+            for annotation in mapView.annotations{
+                guard annotation is TNAnnotation,
+                    let myAnnotation = annotation as? TNAnnotation else { continue }
+                let idCheck = !(myAnnotation.noteIDs.contains(id))
+                let coordCheck = myAnnotation.coordinate.isNearbyTo(loc.coordinate)
+                if idCheck && coordCheck {
+                    myAnnotation.noteIDs.append(id)
+                    return
+                }
+            }
             self.mapView.addAnnotation(placemark)
         })
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        if let label = view.rightCalloutAccessoryView as? UILabel,
+//            let annotation = view.annotation as? TNAnnotation {
+//            var noun = "Note"
+//            if annotation.count == 1 { noun += "s" }
+//            label.text = "\(annotation.count) \(noun)"
+//        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

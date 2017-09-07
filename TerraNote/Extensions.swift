@@ -19,3 +19,12 @@ extension CLPlacemark {
         return array.joined(separator: ", ")
     }
 }
+
+extension CLLocationCoordinate2D {
+    func isNearbyTo(_ coord: CLLocationCoordinate2D)->Bool {
+        let latDiff = abs(coord.latitude - self.latitude)
+        let longDiff = abs(coord.longitude - self.longitude)
+        let distCheck = latDiff < 0.0002 && longDiff < 0.0002
+        return distCheck
+    }
+}
