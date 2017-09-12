@@ -56,9 +56,9 @@ struct TNNote {
 }
 
 enum TNProperty: String {
-    case id = "id"
     case title = "title"
     case date = "date"
     case location = "location"
     case content = "content"
+    case id = "id"
 }

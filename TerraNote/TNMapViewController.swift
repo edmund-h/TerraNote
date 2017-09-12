@@ -56,6 +56,7 @@ class TNMapViewController: UIViewController {
         case "search":
             if let notes = sender as? [TNNote], let destination = segue.destination as? TNSearchTableVC{
                 destination.notes = notes
+                destination.showSearch = false
             }
         default: break
         }

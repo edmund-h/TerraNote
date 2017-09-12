@@ -104,6 +104,9 @@
                                             <segment title=""/>
                                         </segments>
                                         <color key="tintColor" red="0.49019607843137253" green="0.35686274509803922" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="segmentTouched" destination="gQi-xl-nLu" eventType="touchUpInside" id="gus-HZ-1hb"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,6 +124,9 @@
                                     <constraint firstAttribute="height" constant="44" id="u4r-SX-8kv"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gQi-xl-nLu" id="fh9-UF-5bd"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nYM-h3-8tr">
                                 <rect key="frame" x="0.0" y="153" width="414" height="583"/>
@@ -284,7 +290,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lBI-UA-7aE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WUO-2i-O7g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WUO-2i-O7g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">

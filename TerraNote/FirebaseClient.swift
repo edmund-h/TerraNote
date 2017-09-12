@@ -27,25 +27,56 @@ class FirebaseClient {
                 let ids = data.keys
                 var output: [TNNote] = []
                 for id in ids {
-                    if property == .id && id == search,
-                        // if looking for id and id matches target
-                        let noteData = data [id] as? JSON,
-                        let result = TNNote.makeWith(id: id, data: noteData){
-                            output.append(result)
-                            //return only the target note
-                            break
-                    } else if let noteData = data[id] as? JSON,
-                        let item = noteData[property.rawValue] as? String,
-                        // if the property matches
-                        item.lowercased() == search.lowercased(),
-                        let result = TNNote.makeWith(id: id, data: noteData){
-                        
-                            output.append(result)
+                    guard var noteData = data[id] as? JSON else {continue}
+                    var filterFn: (JSON,String,String)->TNNote?
+                    switch property{
+                    case .id:
+                        filterFn = filterByID(data:id:target:)
+                    case .date:
+                        filterFn = filterByDate(data:id:target:)
+                    case .content, .title, .location:
+                        noteData["property"] = property.rawValue
+                        filterFn = filterbyRelevance(data:id:target:)
+                    }
+                    if let note = filterFn(noteData, id, search){
+                        output.append(note)
+                        if property == .id { break }
                     }
                 }
                 completion(output)
             }
         })
+    }
+    
+    private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
+        if target == id, let note = TNNote.makeWith(id: id, data: data){
+            return note
+        }
+        return nil
+    }
+    
+    private static func filterByDate(data: JSON, id: String, target: String)->TNNote? {
+        if let note = TNNote.makeWith(id: id, data: data),
+            let targetParse = target.components(separatedBy: "T").first,
+            let dateParse = note.date.components(separatedBy: "T").first,
+            dateParse.contains(targetParse) {
+                return note
+        }
+        return nil
+    }
+    
+    private static func filterbyRelevance(data: JSON, id: String, target: String)->TNNote?  {
+        if let property = data["property"] as? String,
+            let value = data[property] as? String,
+            let note = TNNote.makeWith(id: id, data: data) {
+            let valueParsed = value.lowercased()
+            let targetParsed = target.lowercased()
+            if valueParsed.contains(targetParsed){
+                return note
+            }
+        }
+        return nil
+        
     }
     
     static func queryList(ofIDs ids: [String], completion: @escaping ([TNNote])->()) {
