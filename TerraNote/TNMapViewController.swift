@@ -14,6 +14,7 @@ class TNMapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class TNMapViewController: UIViewController {
         mapView.setUserTrackingMode(.follow, animated: true)
         
         addButton.layer.cornerRadius = 19
+        searchButton.layer.cornerRadius = 19
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.title = "TerraNote"
@@ -41,6 +43,22 @@ class TNMapViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else {return}
+        switch identifier {
+        case "note":
+            if let note = sender as? TNNote, let destination = segue.destination as? TNNewNoteVC {
+                destination.note = note
+            }
+        case "search":
+            if let notes = sender as? [TNNote], let destination = segue.destination as? TNSearchTableVC{
+                destination.notes = notes
+            }
+        default: break
+        }
     }
 }
 
@@ -86,29 +104,24 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         guard let annotation = view.annotation as? TNAnnotation, annotation.count > 0 else { return }
         let count = annotation.count
         let max = 4
-        var list: [String] = []
-        let moreThan4 = count > max
-        if  moreThan4 {
-            let slice = annotation.noteIDs.prefix(max)
-            list = slice.map({$0})
-        } else {
-            list = annotation.noteIDs
-        }
-        FirebaseClient.queryList(ofIDs: list, completion: { notes in
+        FirebaseClient.queryList(ofIDs: annotation.noteIDs, completion: { notes in
             var titles = notes.map({$0.title})
-            if moreThan4 {
-                titles.removeLast()
+            let moreThan4 = count > max
+            if  moreThan4 {
+                // if there are more than 4 notes, take the first 3
+                let slice = titles.prefix(max - 1)
+                titles = slice.map({$0})
+                // then in the 4th slot, display how many more notes remain. the idea is to never have more than 4 items in the popover
                 titles.append("\(count - max + 1) more notes...")
             }
             let hitbox = view.subviews.first ?? TNViewFormatter.pinHitbox(view)
-            view.layoutIfNeeded()
+            view.layoutIfNeeded() // this crap is here because the pin annotation shadow throws off the FTPopOver, this adds a view corresponding to the pin itself
             FTPopOverMenu.showForSender(sender: hitbox, with: titles, done: { index in
-//                switch index {
-//                case 0...3:
-//                    self.performSegue(withIdentifier: "note", sender: notes[index])
-//                default:
-//                    self.performSegue(withIdentifier: "noteList", sender: annotation.noteIDs)
-//                }
+                if index == 3 && moreThan4 {
+                    self.performSegue(withIdentifier: "search", sender: notes)
+                } else {
+                    self.performSegue(withIdentifier: "note", sender: notes[index])
+                }
             }, cancel: {})
         })
         

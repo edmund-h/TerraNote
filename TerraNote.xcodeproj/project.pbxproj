@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B13B1F633A00FE297D3C323 /* Pods_TerraNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */; };
+		885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885942111F67C46B003F105F /* TNSearchTableVC.swift */; };
 		88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */; };
 		88D0DB651F5F7C0F00F55603 /* TNMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */; };
 		88D0DB681F5F7C0F00F55603 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB661F5F7C0F00F55603 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.release.xcconfig"; sourceTree = "<group>"; };
 		46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		885942111F67C46B003F105F /* TNSearchTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSearchTableVC.swift; sourceTree = "<group>"; };
 		88D0DB5F1F5F7C0F00F55603 /* TerraNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerraNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMapViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		885942131F67C49E003F105F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				88D0DBB31F60C8D400F55603 /* TNAnnotation.swift */,
+				88D0DBA71F5F9E3200F55603 /* TNNote.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		885942141F67C4B1003F105F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				88D0DBA91F5FBCD900F55603 /* TNSignInController.xib */,
+				88D0DBAD1F60827400F55603 /* TNViewFormatter.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		885942151F67C4CD003F105F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */,
+				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
+				885942111F67C46B003F105F /* TNSearchTableVC.swift */,
+				88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		885942161F67C4F5003F105F /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				88D0DB851F5F7D6C00F55603 /* GeoFire */,
+				88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */,
+				88D0DBAB1F606F9000F55603 /* CoreLocClient.swift */,
+				88D0DBA31F5F990600F55603 /* FirebaseClient.swift */,
+			);
+			name = Clients;
+			sourceTree = "<group>";
+		};
 		88D0DB561F5F7C0F00F55603 = {
 			isa = PBXGroup;
 			children = (
@@ -132,24 +174,17 @@
 		88D0DB611F5F7C0F00F55603 /* TerraNote */ = {
 			isa = PBXGroup;
 			children = (
+				885942161F67C4F5003F105F /* Clients */,
+				885942131F67C49E003F105F /* Models */,
+				885942141F67C4B1003F105F /* Views */,
+				885942151F67C4CD003F105F /* Controllers */,
 				88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */,
-				88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */,
-				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
-				88D0DBAD1F60827400F55603 /* TNViewFormatter.swift */,
-				88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */,
-				88D0DB8B1F5F7DB700F55603 /* GeoFireClient.swift */,
-				88D0DBAB1F606F9000F55603 /* CoreLocClient.swift */,
-				88D0DBA31F5F990600F55603 /* FirebaseClient.swift */,
-				88D0DBB31F60C8D400F55603 /* TNAnnotation.swift */,
-				88D0DBA71F5F9E3200F55603 /* TNNote.swift */,
 				88D0DBB11F609D6500F55603 /* Extensions.swift */,
 				88D0DB661F5F7C0F00F55603 /* Main.storyboard */,
 				88D0DB6C1F5F7C0F00F55603 /* Assets.xcassets */,
 				88D0DB6E1F5F7C0F00F55603 /* LaunchScreen.storyboard */,
 				88D0DB711F5F7C0F00F55603 /* Info.plist */,
 				88D0DB9D1F5F7E8200F55603 /* GoogleService-Info.plist */,
-				88D0DB851F5F7D6C00F55603 /* GeoFire */,
-				88D0DBA91F5FBCD900F55603 /* TNSignInController.xib */,
 			);
 			path = TerraNote;
 			sourceTree = "<group>";
@@ -427,6 +462,7 @@
 				88D0DBB21F609D6500F55603 /* Extensions.swift in Sources */,
 				88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */,
 				88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */,
+				885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */,
 				88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */,
 				88D0DBAE1F60827400F55603 /* TNViewFormatter.swift in Sources */,
 			);

@@ -20,6 +20,18 @@ extension CLPlacemark {
     }
 }
 
+extension Date {
+    static func from(iso8601: String)-> Date? {
+        let dateFormatter = ISO8601DateFormatter()
+        return dateFormatter.date(from: iso8601)
+    }
+    
+    func toISO8601()-> String {
+        let formatter = ISO8601DateFormatter()
+        return formatter.string(from: self)
+    }
+}
+
 extension CLLocationCoordinate2D {
     func isNearbyTo(_ coord: CLLocationCoordinate2D)->Bool {
         let latDiff = abs(coord.latitude - self.latitude)
