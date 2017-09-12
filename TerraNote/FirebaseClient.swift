@@ -28,18 +28,39 @@ class FirebaseClient {
                 var output: [TNNote] = []
                 for id in ids {
                     if property == .id && id == search,
+                        // if looking for id and id matches target
                         let noteData = data [id] as? JSON,
                         let result = TNNote.makeWith(id: id, data: noteData){
                             output.append(result)
+                            //return only the target note
                             break
                     } else if let noteData = data[id] as? JSON,
                         let item = noteData[property.rawValue] as? String,
+                        // if the property matches
                         item.lowercased() == search.lowercased(),
                         let result = TNNote.makeWith(id: id, data: noteData){
+                        
                             output.append(result)
                     }
                 }
                 completion(output)
+            }
+        })
+    }
+    
+    static func queryList(ofIDs ids: [String], completion: @escaping ([TNNote])->()) {
+        firebase.observeSingleEvent(of: .value, with: {snapshot in
+            if let data = snapshot.value as? JSON {
+                let idKeys = data.keys
+                var output: [TNNote] = []
+                idKeys.forEach({ id in
+                    if ids.contains(where: {$0 == id}),
+                        let noteData = data[id] as? JSON,
+                        let note = TNNote.makeWith(id: id, data: noteData){
+                        output.append(note)
+                    }
+                })
+                completion (output)
             }
         })
     }

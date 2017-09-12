@@ -16,6 +16,8 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentField: UITextView!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
     
+    var note: TNNote?
+    
     private let myLocationSignifier = "My Current Location"
     
     override func viewDidLoad() {
@@ -27,13 +29,24 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
         contentField.textColor = UIColor.chocolate
         locField.placeholder = myLocationSignifier
         contentField.text = nil
+        if let note = note {
+            titleField.text = note.title
+            locField.text = note.location
+            contentField.text = note.content
+            locField.allowsEditingTextAttributes = false
+            hereBtn.titleLabel?.text = "Change"
+        }
     }
     
     @IBAction func hereBtnTouched() {
+        if let note = note {
+            //TODO: make an alert that asks the user to confirm editing location
+        }
         locField.text = myLocationSignifier
     }
     
     @IBAction func doneBtnTouched() {
+        //TODO: should not make a new note if note already exists
         let loc = locField.text ?? myLocationSignifier
         if loc == myLocationSignifier  || loc.isEmpty {
             CoreLocClient.geocodeMyLocation(completion: { placemark in

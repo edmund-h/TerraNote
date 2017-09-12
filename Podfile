@@ -10,6 +10,7 @@ target 'TerraNote' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'FTPopOverMenu_Swift'
 
   target 'TerraNoteTests' do
     inherit! :search_paths

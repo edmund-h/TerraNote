@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import FTPopOverMenu_Swift
 import GoogleSignIn
 
 class TNMapViewController: UIViewController {
@@ -42,8 +42,6 @@ class TNMapViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
 extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
@@ -56,12 +54,7 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 annotationView.annotation = annotation
             } else {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                //set up callout options etc here
-                annotationView.canShowCallout = true
-                let btn = UIButton(type: .detailDisclosure)
-                //let label = UILabel()
-                annotationView.rightCalloutAccessoryView = btn
-                //annotationView.leftCalloutAccessoryView = label
+                //initial annotation setup if needed
             }
             // further setup here
             annotationView.pinTintColor = UIColor.chocolate
@@ -88,13 +81,31 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         })
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        if let label = view.rightCalloutAccessoryView as? UILabel,
-//            let annotation = view.annotation as? TNAnnotation {
-//            var noun = "Note"
-//            if annotation.count == 1 { noun += "s" }
-//            label.text = "\(annotation.count) \(noun)"
-//        }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation as? TNAnnotation, annotation.count > 0 else { return }
+        let count = annotation.count
+        let max = 4
+        var list: [String] = []
+        let moreThan4 = count > max
+        if  moreThan4 {
+            let slice = annotation.noteIDs.prefix(max)
+            list = slice.map({$0})
+        } else {
+            list = annotation.noteIDs
+        }
+        FirebaseClient.queryList(ofIDs: list, completion: { notes in
+            let titles = notes.map({$0.title})
+            if moreThan4 { list.append("\(count - max) more notes...") }
+            FTPopOverMenu.showForSender(sender: view, with: titles, done: { index in
+//                switch index {
+//                case 0...3:
+//                    self.performSegue(withIdentifier: "note", sender: notes[index])
+//                default:
+//                    self.performSegue(withIdentifier: "noteList", sender: annotation.noteIDs)
+//                }
+            }, cancel: {})
+        })
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
