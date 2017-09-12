@@ -54,10 +54,11 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 annotationView.annotation = annotation
             } else {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView.subviews.forEach({$0.removeFromSuperview()})
                 //initial annotation setup if needed
             }
             // further setup here
-            annotationView.pinTintColor = UIColor.chocolate
+            annotationView.pinTintColor = UIColor.mapChoco
             return annotationView
         }
         return nil
@@ -94,9 +95,14 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             list = annotation.noteIDs
         }
         FirebaseClient.queryList(ofIDs: list, completion: { notes in
-            let titles = notes.map({$0.title})
-            if moreThan4 { list.append("\(count - max) more notes...") }
-            FTPopOverMenu.showForSender(sender: view, with: titles, done: { index in
+            var titles = notes.map({$0.title})
+            if moreThan4 {
+                titles.removeLast()
+                titles.append("\(count - max + 1) more notes...")
+            }
+            let hitbox = view.subviews.first ?? TNViewFormatter.pinHitbox(view)
+            view.layoutIfNeeded()
+            FTPopOverMenu.showForSender(sender: hitbox, with: titles, done: { index in
 //                switch index {
 //                case 0...3:
 //                    self.performSegue(withIdentifier: "note", sender: notes[index])

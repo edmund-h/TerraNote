@@ -49,8 +49,7 @@ extension TNSignInController: GIDSignInDelegate {
                 return
             }
             if let email = user?.email {
-                let emailSeparated = email.components(separatedBy: ".")
-                let emailStr = emailSeparated[0]
+                let emailStr = String(email.hashValue)
                 UserDefaults.standard.setValue(emailStr, forKey: "uid")
                 //FirebaseClient.makeTestData()
                 DispatchQueue.main.async {
@@ -63,6 +62,7 @@ extension TNSignInController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+        //TODO: nuke userdefaults
     }
     
 }

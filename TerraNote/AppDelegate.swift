@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         CoreLocClient.authCheckRequest()
+        TNViewFormatter.setPopoverFormat()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         let navigationBarAppearance = UINavigationBar.appearance()
