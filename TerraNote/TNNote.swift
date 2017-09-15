@@ -10,28 +10,25 @@ import Foundation
 
 struct TNNote {
     let id: String
+    let creator: String
     var title: String
     var date: String
     var location: String
     var content: String
+    var channel: TNChannel?
     
-    var values: [String:String] {
+    var values: [String:Any?] {
         return [
-            TNNote.meta.title : self.title,
-            TNNote.meta.date : self.date,
-            TNNote.meta.location: self.location,
-            TNNote.meta.content: self.content
+            Property.title.rawValue : self.title,
+            Property.date.rawValue: self.date,
+            Property.location.rawValue: self.location,
+            Property.content.rawValue: self.content,
+            Property.creator.rawValue: self.creator,
+            Property.channel.rawValue: self.channel?.values
         ]
     }
     
-    static let meta =
-        TNNote(id: TNProperty.id.rawValue,
-               title: TNProperty.title.rawValue,
-               date: TNProperty.date.rawValue,
-               location: TNProperty.location.rawValue,
-               content: TNProperty.content.rawValue)
-    
-    static func makeFrom(dict:[String:Any])->[TNNote]{
+    static func makeBatchFrom(dict:[String:Any])->[TNNote]{
         let ids = dict.keys
         var notes: [TNNote] = []
         for id in ids {
@@ -45,20 +42,36 @@ struct TNNote {
     
     static func makeWith(id: String, data: [String:Any])->TNNote? {
         
-       if let title = data[meta.title] as? String,
-        let date = data[meta.date] as? String,
-        let location = data[meta.location] as? String,
-        let content = data[meta.content] as? String{
-            return TNNote(id: id, title: title, date: date, location: location, content: content)
+       if let title = data[Property.title.rawValue] as? String,
+        let date = data[Property.date.rawValue] as? String,
+        let location = data[Property.location.rawValue] as? String,
+        let content = data[Property.content.rawValue] as? String,
+        let creator = data[Property.creator.rawValue] as? String,
+        let channelData = data[Property.channel.rawValue] as? [String : Any],
+        let channel = TNChannel.makeWith( dict: channelData ){
+        return TNNote(id: id, creator: creator, title: title, date: date, location: location, content: content, channel: channel)
         }
         return nil
     }
+    
+    struct Short {
+        let id: String
+        let title: String
+        // used for search results
+        var values: [String: String] {
+            return [id:title]
+        }
+    }
+    
+    enum Property: String {
+        case title = "title"
+        case date = "date"
+        case location = "location"
+        case content = "content"
+        case id = "id"
+        case creator = "creator"
+        case channel = "channel"
+    }
 }
 
-enum TNProperty: String {
-    case title = "title"
-    case date = "date"
-    case location = "location"
-    case content = "content"
-    case id = "id"
-}
+

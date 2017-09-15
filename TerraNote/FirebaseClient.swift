@@ -21,7 +21,7 @@ class FirebaseClient {
     
     typealias JSON = [String:Any]
     
-    static func query (by property: TNProperty, with search: String, completion: @escaping ([TNNote])->()) {
+    static func queryNotes (by property: TNNote.Property, with search: String, completion: @escaping ([TNNote])->()) {
         firebase.observeSingleEvent(of: .value, with: { snapshot in
             if let data = snapshot.value as? JSON {
                 let ids = data.keys
@@ -34,7 +34,7 @@ class FirebaseClient {
                         filterFn = filterByID(data:id:target:)
                     case .date:
                         filterFn = filterByDate(data:id:target:)
-                    case .content, .title, .location:
+                    default:
                         noteData["property"] = property.rawValue
                         filterFn = filterbyRelevance(data:id:target:)
                     }
@@ -46,6 +46,10 @@ class FirebaseClient {
                 completion(output)
             }
         })
+    }
+    
+    private static func query(user uid: String, forNote noteID: String){
+        
     }
     
     private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
@@ -105,7 +109,8 @@ class FirebaseClient {
         newNote.setValue(note.values)
         return newNote.key
     }
-    
+}
+    /*
     static func makeTestData(){
         let observations = ["I saw","I heard","I watched","It looked like","I thought about","I remembered", "I observed"]
         let names = ["John","Fred","Sally","Margaret","Umberto","Raquel", "Tran", "Seung-In"]
@@ -152,4 +157,4 @@ class FirebaseClient {
             GeoFireClient.addLocation(noteID: id, coordinate: myCoord)
         }
     }
-}
+}*/

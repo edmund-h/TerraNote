@@ -15,11 +15,16 @@ class TNSearchTableVC: UIViewController {
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var picker: UIDatePicker!
+    @IBOutlet weak var cancelPicker: UIButton!
+    @IBOutlet weak var donePicker: UIButton!
+    @IBOutlet weak var pickerContainer: UIView!
+    @IBOutlet weak var pickerConstraint: NSLayoutConstraint!
     
     var notes: [TNNote] = []
     var showSearch = true
     
-    var properties: [TNProperty] = [.title, .location, .date, .content]
+    var properties: [TNNote.Property] = [.title, .location, .date, .content]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +34,12 @@ class TNSearchTableVC: UIViewController {
         }
         searchBar.returnKeyType = .done
         searchBar.delegate = self
+        TNViewFormatter.formatButton(cancelPicker)
+        TNViewFormatter.formatButton(donePicker)
+        picker.setValue(UIColor.white, forKey: "textColor")
+        let height = pickerContainer.frame.height
+        pickerConstraint.constant = -1 * (height)
+        view.layoutSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +54,20 @@ class TNSearchTableVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    @IBAction func cancelPicker(_ sender: Any) {
+        toggleDatePicker()
+        searchBar.text = nil
+    }
+    
+    @IBAction func donePicker(_ sender: Any) {
+        searchBarSearchButtonClicked(searchBar)
+        toggleDatePicker()
+    }
+    
+    @IBAction func dateChanged(_ sender: UIDatePicker) {
+        searchBar.text = picker.date.toISO8601()
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -52,6 +77,26 @@ class TNSearchTableVC: UIViewController {
             tableView.deselectRow(at: indexPath, animated: false)
         }
     }
+    
+    func toggleDatePicker(){
+        let height = pickerContainer.frame.height
+        if picker.isHidden {
+            picker.isHidden = false
+            pickerConstraint.constant = 0
+            UIView.animate(withDuration: 0.4, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            pickerConstraint.constant = -1 * (height)
+            UIView.animate(withDuration: 0.4, animations: {
+                self.view.layoutIfNeeded()
+            }, completion:{ done in
+                self.picker.isHidden = true
+            })
+        }
+    }
+    
+    
 }
 
 extension TNSearchTableVC: UISearchBarDelegate {
@@ -72,7 +117,7 @@ extension TNSearchTableVC: UISearchBarDelegate {
         guard let text = searchBar.text else {return}
         searchBar.text = nil
         let selected = segment.selectedSegmentIndex
-        FirebaseClient.query(by: properties[selected], with: text, completion: { notes in
+        FirebaseClient.queryNotes(by: properties[selected], with: text, completion: { notes in
             self.notes = notes
             DispatchQueue.main.async {
                 self.tableView.reloadData()

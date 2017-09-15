@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6B13B1F633A00FE297D3C323 /* Pods_TerraNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */; };
 		885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885942111F67C46B003F105F /* TNSearchTableVC.swift */; };
+		88C278081F6B18D700C7C9C3 /* TNUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C278071F6B18D700C7C9C3 /* TNUser.swift */; };
+		88C2780A1F6BDF0900C7C9C3 /* TNChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C278091F6BDF0900C7C9C3 /* TNChannel.swift */; };
 		88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */; };
 		88D0DB651F5F7C0F00F55603 /* TNMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */; };
 		88D0DB681F5F7C0F00F55603 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D0DB661F5F7C0F00F55603 /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 		46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		885942111F67C46B003F105F /* TNSearchTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSearchTableVC.swift; sourceTree = "<group>"; };
+		88C278071F6B18D700C7C9C3 /* TNUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNUser.swift; sourceTree = "<group>"; };
+		88C278091F6BDF0900C7C9C3 /* TNChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNChannel.swift; sourceTree = "<group>"; };
 		88D0DB5F1F5F7C0F00F55603 /* TerraNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TerraNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D0DB621F5F7C0F00F55603 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMapViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				88D0DBB31F60C8D400F55603 /* TNAnnotation.swift */,
 				88D0DBA71F5F9E3200F55603 /* TNNote.swift */,
+				88C278071F6B18D700C7C9C3 /* TNUser.swift */,
+				88C278091F6BDF0900C7C9C3 /* TNChannel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				88D0DB981F5F7DB700F55603 /* GeoFireClient.swift in Sources */,
 				88D0DB991F5F7DB700F55603 /* GFBase32Utils.m in Sources */,
 				88D0DB971F5F7DB700F55603 /* GeoFire.m in Sources */,
+				88C2780A1F6BDF0900C7C9C3 /* TNChannel.swift in Sources */,
 				88D0DB651F5F7C0F00F55603 /* TNMapViewController.swift in Sources */,
 				88D0DB9B1F5F7DB700F55603 /* GFGeoHashQuery.m in Sources */,
 				88D0DBB01F60910600F55603 /* TNNewNoteVC.swift in Sources */,
@@ -460,6 +467,7 @@
 				88D0DBAC1F606F9000F55603 /* CoreLocClient.swift in Sources */,
 				88D0DBB41F60C8D400F55603 /* TNAnnotation.swift in Sources */,
 				88D0DBB21F609D6500F55603 /* Extensions.swift in Sources */,
+				88C278081F6B18D700C7C9C3 /* TNUser.swift in Sources */,
 				88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */,
 				88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */,
 				885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */,
