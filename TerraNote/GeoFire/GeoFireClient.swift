@@ -13,18 +13,20 @@ final class GeoFireClient {
     
     private static var query: GFRegionQuery?
     
-    fileprivate static var geo: GeoFire{
-        var firebase: DatabaseReference {
-            let ref = Database.database().reference()
-            if let uid = UserDefaults.standard.string(forKey: "uid"){
-                return ref.child(uid)
-            }
-            return ref.child("unloggedInUser")
+    private class func geoReference(uid: String? = nil)->GeoFire {
+        let user = UserDefaults.standard.string(forKey: "uid")
+        let locationPath = "locations"
+        let ref = Database.database().reference()
+        if let uid = uid {
+            return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
+        } else if let uid = user {
+            return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
         }
-        return GeoFire(firebaseRef: firebase.child("locations"))
+        return GeoFire(firebaseRef: ref.child("unloggedInUser").child("locations"))
     }
     
     class func addLocation(noteID id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
+        let geo = geoReference()
         let loc  = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         geo.setLocation(loc, forKey: id, withCompletionBlock:{ error in
             NSLog("%@", "added location at (\(coordinate.latitude), \(coordinate.longitude) ")
@@ -34,8 +36,9 @@ final class GeoFireClient {
         
     }
     
-    class func queryLocations(within region: MKCoordinateRegion, response: @escaping (String, CLLocation)->()){
+    class func queryLocations(within region: MKCoordinateRegion, user: String? = nil, response: @escaping (String, CLLocation)->()){
         //remove locations from map first!
+        let geo = geoReference(uid: user)
         GeoFireClient.query = geo.query(with: region)
         guard let query = GeoFireClient.query else {return}
         query.observe(.keyEntered, with: { key, location in
@@ -48,6 +51,7 @@ final class GeoFireClient {
     }
     
     class func removeFromLocationId(noteID id: String, completion: @escaping (Bool)->()){
+        let geo = geoReference()
         geo.removeKey(id, withCompletionBlock: { error in
             completion(error == nil)
         })

@@ -1,8 +1,8 @@
 //
-//  FirebaseClient.swift
+//  CoreLocClient.swift
 //  TerraNote
 //
-//  Created by Edmund Holderbaum on 9/5/17.
+//  Created by Edmund Holderbaum on 9/6/17.
 //  Copyright © 2017 Bozo Design Labs. All rights reserved.
 //
 
@@ -11,12 +11,13 @@ import Firebase
 
 class FirebaseClient {
     
+    fileprivate static let ref = Database.database().reference()
+    
     fileprivate static var firebase: DatabaseReference {
-        let ref = Database.database().reference()
         if let uid = UserDefaults.standard.string(forKey: "uid"){
-            return ref.child(uid).child("notes")
+            return ref.child("users").child(uid).child("notes")
         }
-        return ref.child("unloggedInUser").child("notes")
+        return ref.child("users").child("unloggedInUser").child("notes")
     }
     
     typealias JSON = [String:Any]
@@ -48,8 +49,28 @@ class FirebaseClient {
         })
     }
     
-    private static func query(user uid: String, forNote noteID: String){
-        
+    static func query(user uid: String, forNote noteID: String, completion: @escaping (TNNote?)->()){
+        let firebase = ref.child("users").child(uid)
+        firebase.observeSingleEvent(of: .value, with: { snapshot in
+            if let data = snapshot.value as? JSON{
+                let ids = data.keys
+                for id in ids {
+                    guard let noteData = data[id] as? JSON else {continue}
+                    if let note = filterByID(data: noteData, id: id, target: noteID){
+                        completion(note)
+                        return
+                    }
+                }
+            }
+            completion(nil)
+        })
+    }
+    
+    static func queryChannels(byProperty: TNChannel.Property) {
+        let firebase = ref.child("channels")
+        firebase.observeSingleEvent(of: .value, with: { snapshot in
+            
+        })
     }
     
     private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
