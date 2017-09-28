@@ -46,9 +46,14 @@ struct TNNote {
         let date = data[Property.date.rawValue] as? String,
         let location = data[Property.location.rawValue] as? String,
         let content = data[Property.content.rawValue] as? String,
-        let creator = data[Property.creator.rawValue] as? String,
-        let channelData = data[Property.channel.rawValue] as? [String : Any],
-        let channel = TNChannel.makeWith( dict: channelData ){
+        let creator = data[Property.creator.rawValue] as? String {
+        var channel: TNChannel? = nil
+        //if there is data about a channel this is related to, store it in the channel value
+        if let channelData = data[Property.channel.rawValue] as? [String : String],
+            let channelID = channelData.keys.first,
+            let channelName = channelData.values.first{
+            channel = TNChannel(id: channelID, name: channelName, members: [], notes: [])
+        }
         return TNNote(id: id, creator: creator, title: title, date: date, location: location, content: content, channel: channel)
         }
         return nil

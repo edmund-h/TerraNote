@@ -48,10 +48,10 @@ extension TNSignInController: GIDSignInDelegate {
                 print(error.localizedDescription)
                 return
             }
-            if let email = user?.email {
-                let emailStr = String(email.hashValue)
-                UserDefaults.standard.setValue(emailStr, forKey: "uid")
-                //FirebaseClient.makeTestData()
+            if let email = user?.email, let uid = user?.uid {
+                let emailStr = email.toFBEmailFormat()
+                UserDefaults.standard.setValue(emailStr, forKey: "email")
+                UserDefaults.standard.set(uid, forKey: "uid")
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: nil)
                 }

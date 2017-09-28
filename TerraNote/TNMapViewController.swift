@@ -105,7 +105,7 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         guard let annotation = view.annotation as? TNAnnotation, annotation.count > 0 else { return }
         let count = annotation.count
         let max = 4
-        FirebaseClient.queryList(ofIDs: annotation.noteIDs, completion: { notes in
+        FirebaseClient.queryList(ofIDs: annotation.noteIDs, forUser: TNUser.currentUserID, completion: { notes in
             var titles = notes.map({$0.title})
             let moreThan4 = count > max
             if  moreThan4 {

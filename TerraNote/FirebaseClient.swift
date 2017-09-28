@@ -12,18 +12,16 @@ import Firebase
 class FirebaseClient {
     
     fileprivate static let ref = Database.database().reference()
-    
-    fileprivate static var firebase: DatabaseReference {
-        if let uid = UserDefaults.standard.string(forKey: "uid"){
-            return ref.child("users").child(uid).child("notes")
-        }
-        return ref.child("users").child("unloggedInUser").child("notes")
-    }
+    fileprivate static let users = ref.child("users")
+    fileprivate static let channels = ref.child("channels")
+    fileprivate static let currentUser = users.child(TNUser.currentUserID)
     
     typealias JSON = [String:Any]
     
+    // MARK: Note Query Functions
+    
     static func queryNotes (by property: TNNote.Property, with search: String, completion: @escaping ([TNNote])->()) {
-        firebase.observeSingleEvent(of: .value, with: { snapshot in
+        currentUser.observeSingleEvent(of: .value, with: { snapshot in
             if let data = snapshot.value as? JSON {
                 let ids = data.keys
                 var output: [TNNote] = []
@@ -50,8 +48,7 @@ class FirebaseClient {
     }
     
     static func query(user uid: String, forNote noteID: String, completion: @escaping (TNNote?)->()){
-        let firebase = ref.child("users").child(uid)
-        firebase.observeSingleEvent(of: .value, with: { snapshot in
+        users.child(uid).observeSingleEvent(of: .value, with: { snapshot in
             if let data = snapshot.value as? JSON{
                 let ids = data.keys
                 for id in ids {
@@ -66,13 +63,101 @@ class FirebaseClient {
         })
     }
     
-    static func queryChannels(byProperty: TNChannel.Property) {
-        let firebase = ref.child("channels")
-        firebase.observeSingleEvent(of: .value, with: { snapshot in
-            
+    static func queryList(ofIDs ids: [String], forUser uid: String, completion: @escaping ([TNNote])->()) {
+        // this is used to get ids for the popup preview menu and probably the note list view
+        users.child(uid).observeSingleEvent(of: .value, with: {snapshot in
+            if let data = snapshot.value as? JSON {
+                let idKeys = data.keys
+                var output: [TNNote] = []
+                idKeys.forEach({ id in
+                    if ids.contains(where: {$0 == id}),
+                        let noteData = data[id] as? JSON,
+                        let note = TNNote.makeWith(id: id, data: noteData){
+                        output.append(note)
+                    }
+                })
+                completion (output)
+            }
         })
     }
     
+    //MARK: New Note Functions
+    static func pushTo(note: TNNote){
+        currentUser.child(note.id).setValue(note.values)
+    }
+    
+    static func pushNew(note: TNNote)-> String{
+        let newNote = currentUser.childByAutoId()
+        newNote.setValue(note.values)
+        return newNote.key
+    }
+    
+    // MARK: Channel Functions
+    static func join(channel: TNChannel) {
+        let uid = TNUser.currentUserID
+        let email = TNUser.currentUserEmail
+        currentUser.child("channels").setValue(channel.name, forKey: channel.id)
+        channels.child("members").setValue(email.toFBEmailFormat(), forKey: uid)
+    }
+    
+    static func remove(user: TNUser, fromChannel channel: TNChannel) {
+        
+    }
+    
+    static func queryChannels(byProperty property: TNChannel.Property, withValue value: String, completion: @escaping ([TNChannel])->()) {
+        channels.observeSingleEvent(of: .value, with: { snapshot in
+            if let data = snapshot.value as? JSON {
+                var output: [TNChannel] = []
+                let ids = data.keys
+                for id in ids {
+                    guard let channelData = data[id] as? JSON else {continue}
+                    if let channel = TNChannel.makeWith(id: id, dict: channelData){
+                        var shouldAppend = false
+                        switch property{
+                        case .notes:
+                            shouldAppend = channel.notes.contains(where: {
+                                $0.title.lowercased() == value.lowercased()
+                            })
+                        case .members:
+                            //NOTE: Cannot search members by id. Users will never have access to this
+                            shouldAppend = channel.members.contains(where: {
+                                $0.email == value.toFBEmailFormat() ?? " "
+                            })
+                        case .name:
+                            shouldAppend = channel.name == value
+                        case .id:
+                            shouldAppend = channel.id == value
+                        }
+                        if shouldAppend {
+                            output.append(channel)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    // MARK: Block Functions
+    static func block(_ user: TNUser) {
+        currentUser.child("blocklist").setValue(user.email.toFBEmailFormat(), forKey: user.id)
+    }
+    
+    static func unblock(_ user: TNUser) {
+        currentUser.child("blocklist").child(user.id).removeValue()
+    }
+    
+    static func observeBlocklist(_ active: Bool){
+        if active{
+            currentUser.child("blocklist").observe(.value, with: {snapshot in
+                guard let data = snapshot.value as? [String:String] else {return}
+                UserDefaults.standard.set(data, forKey: "blocklist")
+            })
+        }else {
+            currentUser.child("blocklist").removeAllObservers()
+        }
+    }
+    
+    // MARK: Filter Functions
     private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
         if target == id, let note = TNNote.makeWith(id: id, data: data){
             return note
@@ -85,7 +170,7 @@ class FirebaseClient {
             let targetParse = target.components(separatedBy: "T").first,
             let dateParse = note.date.components(separatedBy: "T").first,
             dateParse.contains(targetParse) {
-                return note
+            return note
         }
         return nil
     }
@@ -102,33 +187,6 @@ class FirebaseClient {
         }
         return nil
         
-    }
-    
-    static func queryList(ofIDs ids: [String], completion: @escaping ([TNNote])->()) {
-        firebase.observeSingleEvent(of: .value, with: {snapshot in
-            if let data = snapshot.value as? JSON {
-                let idKeys = data.keys
-                var output: [TNNote] = []
-                idKeys.forEach({ id in
-                    if ids.contains(where: {$0 == id}),
-                        let noteData = data[id] as? JSON,
-                        let note = TNNote.makeWith(id: id, data: noteData){
-                        output.append(note)
-                    }
-                })
-                completion (output)
-            }
-        })
-    }
-    
-    static func pushTo(note: TNNote){
-        firebase.child(note.id).setValue(note.values)
-    }
-    
-    static func pushNew(note: TNNote)-> String{
-        let newNote = firebase.childByAutoId()
-        newNote.setValue(note.values)
-        return newNote.key
     }
 }
     /*

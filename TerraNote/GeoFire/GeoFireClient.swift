@@ -14,15 +14,14 @@ final class GeoFireClient {
     private static var query: GFRegionQuery?
     
     private class func geoReference(uid: String? = nil)->GeoFire {
-        let user = UserDefaults.standard.string(forKey: "uid")
+        let user = TNUser.currentUserID
         let locationPath = "locations"
         let ref = Database.database().reference()
         if let uid = uid {
             return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
-        } else if let uid = user {
-            return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
+        } else {
+            return GeoFire(firebaseRef: ref.child(user).child(locationPath))
         }
-        return GeoFire(firebaseRef: ref.child("unloggedInUser").child("locations"))
     }
     
     class func addLocation(noteID id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
