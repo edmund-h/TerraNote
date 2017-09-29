@@ -23,6 +23,8 @@ class TNSearchTableVC: UIViewController {
     
     var notes: [TNNote] = []
     var showSearch = true
+    var pickerUp = false
+    var pickerDate: Date? = nil
     
     var properties: [TNNote.Property] = [.title, .location, .date, .content]
     
@@ -39,6 +41,11 @@ class TNSearchTableVC: UIViewController {
         picker.setValue(UIColor.white, forKey: "textColor")
         let height = pickerContainer.frame.height
         pickerConstraint.constant = -1 * (height)
+        pickerContainer.isHidden = true
+        pickerContainer.subviews.forEach({
+            $0.isHidden = true
+            $0.isUserInteractionEnabled = false
+        })
         view.layoutSubviews()
     }
     
@@ -55,17 +62,20 @@ class TNSearchTableVC: UIViewController {
     }
     
     @IBAction func cancelPicker(_ sender: Any) {
-        toggleDatePicker()
+        toggleDatePicker(show: false)
         searchBar.text = nil
     }
     
     @IBAction func donePicker(_ sender: Any) {
         searchBarSearchButtonClicked(searchBar)
-        toggleDatePicker()
+        toggleDatePicker(show: false)
     }
     
     @IBAction func dateChanged(_ sender: UIDatePicker) {
-        searchBar.text = picker.date.toISO8601()
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = .short
+        pickerDate = picker.date
+        searchBar.text = dateformatter.string(from: pickerDate!)
     }
     
     // MARK: - Navigation
@@ -78,9 +88,16 @@ class TNSearchTableVC: UIViewController {
         }
     }
     
-    func toggleDatePicker(){
+    func toggleDatePicker(show: Bool){
+        if pickerContainer.isHidden == true {
+            pickerContainer.isHidden = false
+            pickerContainer.subviews.forEach({
+                $0.isHidden = false
+                $0.isUserInteractionEnabled = true
+            })
+        }
         let height = pickerContainer.frame.height
-        if picker.isHidden {
+        if show {
             picker.isHidden = false
             pickerConstraint.constant = 0
             UIView.animate(withDuration: 0.4, animations: {
@@ -106,7 +123,7 @@ extension TNSearchTableVC: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         if segment.selectedSegmentIndex == 2 {
-            // bring up datepicker if not already up
+            toggleDatePicker(show: true)
             return false
         }
         return true
@@ -114,9 +131,13 @@ extension TNSearchTableVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let text = searchBar.text else {return}
+        guard var text = searchBar.text else {return}
         searchBar.text = nil
         let selected = segment.selectedSegmentIndex
+        if selected == 2,
+            let date = pickerDate {
+            text = date.toISO8601()
+        }
         FirebaseClient.queryNotes(by: properties[selected], with: text, completion: { notes in
             self.notes = notes
             DispatchQueue.main.async {
@@ -125,11 +146,15 @@ extension TNSearchTableVC: UISearchBarDelegate {
         })
     }
     
-    @IBAction func segmentTouched(){
+    @IBAction func segmentHighlighted(){
+        print("yo")
         if segment.selectedSegmentIndex == 2 {
             searchBar.resignFirstResponder()
             searchBar.text = nil
-            // bring up datepicker
+            toggleDatePicker(show: true)
+        } else {
+            toggleDatePicker(show: false)
+            searchBar.becomeFirstResponder()
         }
     }
 }
