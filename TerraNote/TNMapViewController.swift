@@ -29,6 +29,9 @@ class TNMapViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.title = "TerraNote"
+        
+        let notificationName = NSNotification.Name.init("mapViewChangeLocation")
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLocation), name: notificationName, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,11 +41,6 @@ class TNMapViewController: UIViewController {
         } else {
             
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,8 +59,26 @@ class TNMapViewController: UIViewController {
         default: break
         }
     }
+    
+    // MARK: Helper functions
+    func changeLocation() {
+        var location: String = ""
+        let notificationName = NSNotification.Name.init("mapViewChangeLocation")
+        let notification = Notification(name: notificationName)
+        if let info = notification.userInfo, let myLocation = info["location"] as? String {
+            location = myLocation
+        } // left the possibility for other ways to use this function here but probably should only use this notification
+        mapView.userTrackingMode = .none
+        CoreLocClient.forwardGeocode(address: location, completion: { placemark in
+            if let placemark = placemark, let placemarkLocation = placemark.location{
+                let coordinate = placemarkLocation.coordinate
+                self.mapView.setCenter(coordinate, animated: true)
+            }
+        })
+    }
 }
 
+//MARK: MapView, CLLocationManager Delelegate
 extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is TNAnnotation {
