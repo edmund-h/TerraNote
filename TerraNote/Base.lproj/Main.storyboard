@@ -39,7 +39,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gQi-xl-nLu" kind="show" identifier="search" id="RUk-3q-PDm"/>
+                                    <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jWC-di-iO6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8G-JI-ziL">
@@ -78,7 +78,8 @@
                         <outlet property="addButton" destination="A8G-JI-ziL" id="Rob-9i-5bB"/>
                         <outlet property="mapView" destination="g8c-Kr-JZS" id="kqi-oa-kiG"/>
                         <outlet property="searchButton" destination="ltl-ha-0nK" id="lS7-Ge-gJo"/>
-                        <segue destination="pmr-Lh-IZi" kind="presentation" modalPresentationStyle="overCurrentContext" id="Wdf-8w-ajP"/>
+                        <segue destination="pmr-Lh-IZi" kind="presentation" identifier="location" modalPresentationStyle="overCurrentContext" id="Wdf-8w-ajP"/>
+                        <segue destination="gQi-xl-nLu" kind="show" identifier="search" id="Isa-CI-EzL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

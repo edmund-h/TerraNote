@@ -23,7 +23,9 @@ class TNLocationSearchVC: UIViewController {
     
     override func viewDidLoad() {
         tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "completionCell")
+        searchBar.delegate = self
         super.viewDidLoad()
     }
     
@@ -58,6 +60,8 @@ extension TNLocationSearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = completions[indexPath.row]
+        cell.contentView.layer.cornerRadius = 9
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
     }
     

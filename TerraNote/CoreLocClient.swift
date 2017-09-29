@@ -45,7 +45,7 @@ final class CoreLocClient{
     class func forwardGeocodeAutoCompletions(text: String, completion: @escaping ([String])->()) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(text, completionHandler: { placemarks, error in
-            var completions = [String]()
+            var completions: [String] = []
             if  let placemarks = placemarks {
                 print (placemarks.count)
                 placemarks.forEach({

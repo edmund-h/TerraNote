@@ -39,7 +39,7 @@ class TNMapViewController: UIViewController {
             let signIn = TNSignInController(nibName: "TNSignInController", bundle: Bundle.main)
             self.present(signIn, animated: false, completion: nil)
         } else {
-            
+            // ughh handle this error
         }
     }
     
@@ -60,11 +60,29 @@ class TNMapViewController: UIViewController {
         }
     }
     
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        
+        FTPopOverMenu.showForSender(sender: sender, with: ["My Location!", "Find Location","Find Note","Find Channel","Find User"], done: { option in
+            switch option{
+            case 0:
+                self.mapView.setUserTrackingMode( .follow , animated: true)
+            case 1:
+                self.performSegue(withIdentifier: "location", sender: nil)
+            case 2:
+                self.performSegue(withIdentifier: "search", sender: nil)
+            case 3:
+                print("channel search segue goes here")
+            case 4:
+                print("find user segue goes here")
+            default:
+                print("oops!")
+            }
+        }, cancel: {})
+    }
+    
     // MARK: Helper functions
-    func changeLocation() {
+    func changeLocation(notification: Notification) {
         var location: String = ""
-        let notificationName = NSNotification.Name.init("mapViewChangeLocation")
-        let notification = Notification(name: notificationName)
         if let info = notification.userInfo, let myLocation = info["location"] as? String {
             location = myLocation
         } // left the possibility for other ways to use this function here but probably should only use this notification
@@ -72,7 +90,9 @@ class TNMapViewController: UIViewController {
         CoreLocClient.forwardGeocode(address: location, completion: { placemark in
             if let placemark = placemark, let placemarkLocation = placemark.location{
                 let coordinate = placemarkLocation.coordinate
-                self.mapView.setCenter(coordinate, animated: true)
+                DispatchQueue.main.async {
+                    self.mapView.setCenter(coordinate, animated: true)
+                }
             }
         })
     }
