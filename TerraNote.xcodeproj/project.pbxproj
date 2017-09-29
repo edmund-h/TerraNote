@@ -33,6 +33,7 @@
 		88D0DBB01F60910600F55603 /* TNNewNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */; };
 		88D0DBB21F609D6500F55603 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBB11F609D6500F55603 /* Extensions.swift */; };
 		88D0DBB41F60C8D400F55603 /* TNAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0DBB31F60C8D400F55603 /* TNAnnotation.swift */; };
+		88F8EAF71F7E70F90061D863 /* TNLocationSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8EAF61F7E70F90061D863 /* TNLocationSearchVC.swift */; };
 		CE4EA319B8AA5D7134BF48DF /* Pods_TerraNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0118F498835A7061184082FB /* Pods_TerraNote.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNNewNoteVC.swift; sourceTree = "<group>"; };
 		88D0DBB11F609D6500F55603 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		88D0DBB31F60C8D400F55603 /* TNAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNAnnotation.swift; sourceTree = "<group>"; };
+		88F8EAF61F7E70F90061D863 /* TNLocationSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNLocationSearchVC.swift; sourceTree = "<group>"; };
 		D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
 				885942111F67C46B003F105F /* TNSearchTableVC.swift */,
 				88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */,
+				88F8EAF61F7E70F90061D863 /* TNLocationSearchVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				88D0DBAC1F606F9000F55603 /* CoreLocClient.swift in Sources */,
 				88D0DBB41F60C8D400F55603 /* TNAnnotation.swift in Sources */,
 				88D0DBB21F609D6500F55603 /* Extensions.swift in Sources */,
+				88F8EAF71F7E70F90061D863 /* TNLocationSearchVC.swift in Sources */,
 				88C278081F6B18D700C7C9C3 /* TNUser.swift in Sources */,
 				88D0DBA41F5F990600F55603 /* FirebaseClient.swift in Sources */,
 				88D0DBA01F5F87C400F55603 /* TNSignInController.swift in Sources */,
