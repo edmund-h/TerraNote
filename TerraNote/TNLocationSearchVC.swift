@@ -65,5 +65,6 @@ extension TNLocationSearchVC: UITableViewDelegate, UITableViewDataSource {
         let notificationName = NSNotification.Name.init("mapViewChangeLocation")
         let location = completions[indexPath.row]
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["location":location])
+        self.dismiss(animated: true, completion: nil)
     }
 }

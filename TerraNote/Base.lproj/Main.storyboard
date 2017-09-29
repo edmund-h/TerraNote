@@ -85,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="972" y="55.322338830584712"/>
         </scene>
-        <!--View Controller-->
+        <!--Location SearchVC-->
         <scene sceneID="7LX-Hu-UkL">
             <objects>
-                <viewController id="pmr-Lh-IZi" sceneMemberID="viewController">
+                <viewController id="pmr-Lh-IZi" customClass="TNLocationSearchVC" customModule="TerraNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6OL-Z1-UaC"/>
                         <viewControllerLayoutGuide type="bottom" id="qOf-tj-Anb"/>
@@ -131,6 +131,10 @@
                             <constraint firstItem="4Xg-J1-dQb" firstAttribute="top" secondItem="1cU-Z7-X0I" secondAttribute="bottom" constant="-4" id="rNi-44-VM2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="1cU-Z7-X0I" id="3Nv-5k-W2t"/>
+                        <outlet property="tableView" destination="4Xg-J1-dQb" id="ARB-m5-v4d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ix-UW-uGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

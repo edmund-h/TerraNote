@@ -16,7 +16,7 @@ final class GeoFireClient {
     private class func geoReference(uid: String? = nil)->GeoFire {
         let user = TNUser.currentUserID
         let locationPath = "locations"
-        let ref = Database.database().reference()
+        let ref = Database.database().reference().child("users")
         if let uid = uid {
             return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
         } else {
