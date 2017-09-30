@@ -56,6 +56,6 @@ class TNViewFormatter {
 }//contains functions to format the views
 
 extension UIColor{
-    static let chocolate = UIColor(colorLiteralRed: 105/255.0, green: 71/255.0, blue: 56/255.0, alpha: 1)
-    static let mapChoco = UIColor(colorLiteralRed: 125/255.0, green: 91/255.0, blue: 76/255.0, alpha: 1)
+    static let chocolate = UIColor(displayP3Red: 105/255.0, green: 71/255.0, blue: 56/255.0, alpha: 1)
+    static let mapChoco = UIColor(displayP3Red: 125/255.0, green: 91/255.0, blue: 76/255.0, alpha: 1)
 }//contains a visually appealing custom brown color for aesthetic unity

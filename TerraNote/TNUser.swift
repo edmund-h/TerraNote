@@ -44,7 +44,7 @@ struct TNUser {
             if let channelDict = dict[Property.channels.rawValue] as? [String:Any],
                 let userDict = dict[Property.blocklist.rawValue] as? [String:Any] {
                 channelDict.forEach({id, value in
-                    if let name = value as? String{
+                    if let name = value as? String {
                         let channel = TNChannel(id: id, name: name, members: [], notes: [])
                         user.channels.append(channel)
                     }

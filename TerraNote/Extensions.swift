@@ -60,3 +60,14 @@ extension String {
         return nil
     }
 }
+
+extension UIView {
+    func addAndConstrainTo(view: UIView) {
+        view.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        self.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        self.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    }
+}

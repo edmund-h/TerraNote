@@ -31,7 +31,7 @@ struct TNChannel {
         if let name = dict[Property.name.rawValue] as? String,
             let memberDict = dict[Property.members.rawValue] as? [String:Any],
             let noteDict = dict[Property.notes.rawValue] as? [String:Any]{
-            var channel = TNChannel(id: id, name: name, members: [], notes: [])
+            var channel = TNChannel(id: id, name: name,  members: [], notes: [])
             memberDict.forEach({key, value in
                 if let value = value as? String,
                     let email = value.fromFBEmailFormat() {

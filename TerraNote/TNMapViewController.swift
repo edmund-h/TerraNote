@@ -71,7 +71,7 @@ class TNMapViewController: UIViewController {
             case 2:
                 self.performSegue(withIdentifier: "search", sender: nil)
             case 3:
-                print("channel search segue goes here")
+                self.performSegue(withIdentifier: "channel", sender: nil)
             case 4:
                 print("find user segue goes here")
             default:
