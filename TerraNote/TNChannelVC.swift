@@ -18,6 +18,8 @@ class TNChannelVC: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchType: UISegmentedControl!
     
+    @IBOutlet weak var newChannelButton: UIBarButtonItem!
+    
     var channels: [TNChannel] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -43,9 +45,30 @@ class TNChannelVC: UIViewController {
             FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
                 self.channels = channels
             })
+        } else {
+            newChannelButton.tintColor = UIColor.clear
+            newChannelButton.isEnabled = false
         }
     }
     
+    @IBAction func newChannelButtonClicked() {
+        guard self.searchMode == false else {return}
+        let infoAlert = UIAlertController(title: "Add Channel", message: "Channels are a way to share notes between people. Create a channel, and anyone can search for the channel name or your email to join, see your notes, and add their own. Do not use channels to share private data!", preferredStyle: .alert)
+        infoAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            _ in
+            let newChannelAlert = UIAlertController(title: "Add Channel", message: "Enter a name for your channel", preferredStyle: .alert )
+            newChannelAlert.addTextField(configurationHandler: nil)
+            newChannelAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in newChannelAlert.dismiss(animated: true, completion: nil)}))
+            newChannelAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                if let field = newChannelAlert.textFields?.first, let name = field.text, name != "" {
+                    FirebaseClient.add(channelNamed: name)
+                    newChannelAlert.dismiss(animated: true, completion: nil)
+                }
+            }))
+            infoAlert.dismiss(animated: true, completion: {self.present(newChannelAlert, animated: true, completion: nil) })
+        }))
+        self.present(infoAlert, animated: true, completion: nil)
+    }
 }
 
 // MARK: TableView Functions

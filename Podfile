@@ -17,8 +17,4 @@ target 'TerraNote' do
     # Pods for testing
   end
 
-  platform :ios
-  # ignore all warnings from all pods
-  inhibit_all_warnings!
-
 end

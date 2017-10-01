@@ -20,7 +20,6 @@ struct TNChannel {
         self.members.forEach({members[$0.id] = $0.email})
         self.notes.forEach({notes[$0.id] = $0.title})
         return [
-            Property.id.rawValue : id,
             Property.name.rawValue : name,
             Property.members.rawValue : members,
             Property.notes.rawValue : notes

@@ -17,7 +17,6 @@ struct TNUser {
     var values: [String:Any]{
         return [
             Property.email.rawValue : email,
-            Property.id.rawValue : id,
             Property.channels.rawValue : channels,
             Property.blocklist.rawValue: blocklist
         ]
@@ -34,6 +33,11 @@ struct TNUser {
             return email
         }
         return "unloggedInUser"
+    }
+    
+    static var currentUserFull: TNUser {
+        let user = TNUser(email: TNUser.currentUserEmail, id: TNUser.currentUserID, channels: [], blocklist: [])
+        return user
     }
     
     static func makeWith(_ dict: [String: Any])-> TNUser? {

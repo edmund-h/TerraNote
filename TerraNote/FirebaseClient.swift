@@ -81,7 +81,7 @@ class FirebaseClient {
         })
     }
     
-    //MARK: New Note Functions
+    //MARK: Note Edit Functions
     static func pushTo(note: TNNote){
         currentUser.child(note.id).setValue(note.values)
     }
@@ -96,8 +96,14 @@ class FirebaseClient {
     static func join(channel: TNChannel) {
         let uid = TNUser.currentUserID
         let email = TNUser.currentUserEmail
-        currentUser.child("channels").setValue(channel.name, forKey: channel.id)
-        channels.child("members").setValue(email.toFBEmailFormat(), forKey: uid)
+        currentUser.child(TNUser.Property.channels.rawValue).setValue(channel.name, forKey: channel.id)
+        channels.child(channel.id).child(TNChannel.Property.members.rawValue).setValue(email.toFBEmailFormat(), forKey: uid)
+    }
+    
+    static func add(channelNamed name: String) {
+        let newChannel = channels.childByAutoId()
+        newChannel.setValue([TNChannel.Property.name : name])
+        join(channel: TNChannel(id: newChannel.key, name: name, members: [], notes: []))
     }
     
     static func remove(user: TNUser, fromChannel channel: TNChannel) {
