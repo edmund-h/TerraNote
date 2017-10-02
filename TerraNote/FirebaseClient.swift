@@ -96,13 +96,13 @@ class FirebaseClient {
     static func join(channel: TNChannel) {
         let uid = TNUser.currentUserID
         let email = TNUser.currentUserEmail
-        currentUser.child(TNUser.Property.channels.rawValue).setValue(channel.name, forKey: channel.id)
-        channels.child(channel.id).child(TNChannel.Property.members.rawValue).setValue(email.toFBEmailFormat(), forKey: uid)
+        currentUser.child(TNUser.Property.channels.rawValue).setValue([channel.id : channel.name])
+        channels.child(channel.id).child(TNChannel.Property.members.rawValue).setValue([uid : email.toFBEmailFormat()])
     }
     
     static func add(channelNamed name: String) {
         let newChannel = channels.childByAutoId()
-        newChannel.setValue([TNChannel.Property.name : name])
+        newChannel.child(TNChannel.Property.name.rawValue).setValue(name)
         join(channel: TNChannel(id: newChannel.key, name: name, members: [], notes: []))
     }
     

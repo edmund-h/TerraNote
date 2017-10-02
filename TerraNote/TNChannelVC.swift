@@ -58,14 +58,17 @@ class TNChannelVC: UIViewController {
             _ in
             let newChannelAlert = UIAlertController(title: "Add Channel", message: "Enter a name for your channel", preferredStyle: .alert )
             newChannelAlert.addTextField(configurationHandler: nil)
-            newChannelAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in newChannelAlert.dismiss(animated: true, completion: nil)}))
+            newChannelAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+                newChannelAlert.dismiss(animated: true, completion: nil)
+            }))
             newChannelAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 if let field = newChannelAlert.textFields?.first, let name = field.text, name != "" {
                     FirebaseClient.add(channelNamed: name)
                     newChannelAlert.dismiss(animated: true, completion: nil)
                 }
+                infoAlert.dismiss(animated: true, completion: {})
             }))
-            infoAlert.dismiss(animated: true, completion: {self.present(newChannelAlert, animated: true, completion: nil) })
+            self.present(newChannelAlert, animated: true, completion: nil)
         }))
         self.present(infoAlert, animated: true, completion: nil)
     }
