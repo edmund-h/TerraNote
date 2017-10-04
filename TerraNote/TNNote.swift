@@ -17,6 +17,10 @@ struct TNNote {
     var content: String
     var channel: TNChannel?
     
+    var short: TNNote.Short {
+        return TNNote.Short(id: self.id, title: self.title, date: self.date)
+    }
+    
     var values: [String:Any?] {
         return [
             Property.title.rawValue : self.title,
@@ -62,9 +66,16 @@ struct TNNote {
     struct Short {
         let id: String
         let title: String
+        let date: String
         // used for search results
-        var values: [String: String] {
-            return [id:title]
+        var values: [String: [String:String]] {
+            return [id:[title:date]]
+        }
+        static func makeWith(id: String, data: [String:Any])->TNNote.Short?{
+            if let key = data.keys.first, let value = data.values.first as? String {
+                return TNNote.Short(id: id, title: key, date: value)
+            }
+            return nil
         }
     }
     

@@ -34,13 +34,15 @@ struct TNChannel {
             memberDict.forEach({key, value in
                 if let value = value as? String,
                     let email = value.fromFBEmailFormat() {
-                    let user = TNUser(email: email, id: id, channels: [], blocklist: [] )
+                    let user = TNUser(email: email, id: id, channels: [], blocklist: [], notes: [] )
                     channel.members.append(user)
                 }
             })
             noteDict.forEach({ key, value in
-                if let value = value as? String {
-                    let note = TNNote.Short(id: key, title: value )
+                if let value = value as? [String:String],
+                    let title = value.keys.first,
+                    let date = value.values.first {
+                    let note = TNNote.Short(id: key, title: title, date: date)
                     channel.notes.append(note)
                 }
             })

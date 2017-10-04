@@ -12,8 +12,9 @@ import Firebase
 class FirebaseClient {
     
     fileprivate static let ref = Database.database().reference()
-    fileprivate static let users = ref.child("users")
-    fileprivate static let channels = ref.child("channels")
+    fileprivate static let users = ref.child(TNObjects.users.rawValue)
+    fileprivate static let channels = ref.child(TNObjects.channels.rawValue)
+    fileprivate static let notes = ref.child(TNObjects.notes.rawValue)
     fileprivate static let currentUser = users.child(TNUser.currentUserID)
     
     typealias JSON = [String:Any]
@@ -21,7 +22,7 @@ class FirebaseClient {
     // MARK: Note Query Functions
     
     static func queryNotes (by property: TNNote.Property, with search: String, completion: @escaping ([TNNote])->()) {
-        currentUser.observeSingleEvent(of: .value, with: { snapshot in
+        currentUser.child(TNUser.Property.notes.rawValue).observeSingleEvent(of: .value, with: { snapshot in
             if let data = snapshot.value as? JSON {
                 let ids = data.keys
                 var output: [TNNote] = []
@@ -83,12 +84,17 @@ class FirebaseClient {
     
     //MARK: Note Edit Functions
     static func pushTo(note: TNNote){
-        currentUser.child(note.id).setValue(note.values)
+        currentUser.child(TNUser.Property.notes.rawValue).setValue(note.short.values)
+        notes.child(note.id).setValue(note.values)
     }
     
     static func pushNew(note: TNNote)-> String{
-        let newNote = currentUser.childByAutoId()
+        let newNote = notes.childByAutoId()
         newNote.setValue(note.values)
+        currentUser.child(TNUser.Property.notes.rawValue).setValue(note.short.values)
+        if let channel = note.channel {
+            channels.child(channel.id).child(TNChannel.Property.notes.rawValue).setValue(note.short.values)
+        }
         return newNote.key
     }
     
@@ -145,52 +151,64 @@ class FirebaseClient {
     
     // MARK: Block Functions
     static func block(_ user: TNUser) {
-        currentUser.child("blocklist").setValue(user.email.toFBEmailFormat(), forKey: user.id)
+        currentUser.child(TNUser.Property.blocklist.rawValue).setValue(user.email.toFBEmailFormat(), forKey: user.id)
     }
     
     static func unblock(_ user: TNUser) {
-        currentUser.child("blocklist").child(user.id).removeValue()
+        currentUser.child(TNUser.Property.blocklist.rawValue).child(user.id).removeValue()
     }
     
     static func observeBlocklist(_ active: Bool){
         if active{
-            currentUser.child("blocklist").observe(.value, with: {snapshot in
+            currentUser.child(TNUser.Property.blocklist.rawValue).observe(.value, with: {snapshot in
                 guard let data = snapshot.value as? [String:String] else {return}
-                UserDefaults.standard.set(data, forKey: "blocklist")
+                UserDefaults.standard.set(data, forKey: TNUser.Property.blocklist.rawValue)
             })
         }else {
-            currentUser.child("blocklist").removeAllObservers()
+            currentUser.child(TNUser.Property.blocklist.rawValue).removeAllObservers()
         }
     }
     
     // MARK: Filter Functions
     private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
-        if target == id, let note = TNNote.makeWith(id: id, data: data){
-            return note
+        var toReturn: TNNote? = nil
+        if target == id{
+            notes.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                if let noteData = snapshot.value as? JSON {
+                    toReturn = TNNote.makeWith(id: id, data: noteData)
+                }
+            })
         }
-        return nil
+        return toReturn
     }
     
     private static func filterByDate(data: JSON, id: String, target: String)->TNNote? {
-        if let note = TNNote.makeWith(id: id, data: data),
+        if let noteShort = TNNote.Short.makeWith(id: id, data: data),
             let targetParse = target.components(separatedBy: "T").first,
-            let dateParse = note.date.components(separatedBy: "T").first,
+            let dateParse = noteShort.date.components(separatedBy: "T").first,
             dateParse.contains(targetParse) {
+            var note: TNNote? = nil
+            notes.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                if let noteData = snapshot.value as? JSON {
+                    note = TNNote.makeWith(id: id, data: noteData)
+                }
+            })
             return note
         }
         return nil
     }
     
     private static func filterbyRelevance(data: JSON, id: String, target: String)->TNNote?  {
-        if let property = data["property"] as? String,
-            let value = data[property] as? String,
-            let note = TNNote.makeWith(id: id, data: data) {
-            let valueParsed = value.lowercased()
-            let targetParsed = target.lowercased()
-            if valueParsed.contains(targetParsed){
-                return note
-            }
-        }
+        // TODO: Fix this
+//        if let property = data["property"] as? String,
+//            let value = data[property] as? String,
+//            let note = TNNote.makeWith(id: id, data: data) {
+//            let valueParsed = value.lowercased()
+//            let targetParsed = target.lowercased()
+//            if valueParsed.contains(targetParsed){
+//                return note
+//            }
+//        }
         return nil
         
     }

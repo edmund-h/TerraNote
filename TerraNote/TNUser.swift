@@ -13,12 +13,21 @@ struct TNUser {
     let id: String
     var channels: [TNChannel]
     var blocklist: [TNUser]
+    var notes: [TNNote.Short]
     
     var values: [String:Any]{
+        var channels: [String:String] = [:]
+        var blocklist: [String:String] = [:]
+        var notesDict: [String:[String:String]] = [:]
+        self.channels.forEach({channels[$0.id] = $0.name})
+        self.blocklist.forEach({blocklist[$0.id] = $0.email})
+        self.notes.forEach({notesDict.merge($0.values, uniquingKeysWith: {(current, _) in current}) })
         return [
-            Property.email.rawValue : email,
+            Property.id.rawValue : self.id,
+            Property.email.rawValue : self.email,
             Property.channels.rawValue : channels,
-            Property.blocklist.rawValue: blocklist
+            Property.blocklist.rawValue: blocklist,
+            Property.notes.rawValue: notesDict
         ]
     }
     
@@ -36,7 +45,7 @@ struct TNUser {
     }
     
     static var currentUserFull: TNUser {
-        let user = TNUser(email: TNUser.currentUserEmail, id: TNUser.currentUserID, channels: [], blocklist: [])
+        let user = TNUser(email: TNUser.currentUserEmail, id: TNUser.currentUserID, channels: [], blocklist: [], notes: [])
         return user
     }
     
@@ -44,7 +53,7 @@ struct TNUser {
         if let id = dict[Property.id.rawValue] as? String,
             let emailValue = dict[Property.email.rawValue] as? String,
             let email = emailValue.fromFBEmailFormat(){
-            var user = TNUser(email: email, id: id, channels: [], blocklist: [])
+            var user = TNUser(email: email, id: id, channels: [], blocklist: [], notes:[])
             if let channelDict = dict[Property.channels.rawValue] as? [String:Any],
                 let userDict = dict[Property.blocklist.rawValue] as? [String:Any] {
                 channelDict.forEach({id, value in
@@ -56,7 +65,7 @@ struct TNUser {
                 userDict.forEach({key, value in
                     if let emailRaw = value as? String,
                         let email = emailRaw.fromFBEmailFormat() {
-                        let blocked = TNUser(email: email, id: id, channels: [], blocklist: [])
+                        let blocked = TNUser(email: email, id: id, channels: [], blocklist: [], notes: [])
                         user.blocklist.append(blocked)
                     }
                 })
@@ -71,5 +80,6 @@ struct TNUser {
         case id = "id"
         case channels = "channels"
         case blocklist = "blocklist"
+        case notes = "notes"
     }
 }
