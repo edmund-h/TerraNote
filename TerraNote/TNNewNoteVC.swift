@@ -16,7 +16,18 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentField: UITextView!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
     
-    var note: TNNote?
+    var noteShort: TNNote.Short?
+    var note: TNNote? {
+        didSet {
+            if let note = self.note {
+                titleField.text = note.title
+                locField.text = note.location
+                contentField.text = note.content
+                locField.allowsEditingTextAttributes = false
+                hereBtn.titleLabel?.text = "Change"
+            }
+        }
+    }
     
     private let myLocationSignifier = "My Current Location"
     
@@ -29,13 +40,13 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
         contentField.textColor = UIColor.chocolate
         locField.placeholder = myLocationSignifier
         contentField.text = nil
-        if let note = note {
-            titleField.text = note.title
-            locField.text = note.location
-            contentField.text = note.content
-            locField.allowsEditingTextAttributes = false
-            hereBtn.titleLabel?.text = "Change"
-        }
+        guard let noteID = noteShort?.id else {return}
+        FirebaseClient.getNote(withID: noteID, completion: {note in
+            if let note = note {
+                self.note = note
+            }
+        })
+        
     }
     
     @IBAction func hereBtnTouched() {

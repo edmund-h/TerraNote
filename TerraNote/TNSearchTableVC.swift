@@ -21,7 +21,7 @@ class TNSearchTableVC: UIViewController {
     @IBOutlet weak var pickerContainer: UIView!
     @IBOutlet weak var pickerConstraint: NSLayoutConstraint!
     
-    var notes: [TNNote] = []
+    var notes: [TNNote.Short] = []
     var showSearch = true
     var pickerUp = false
     var pickerDate: Date? = nil
@@ -83,7 +83,7 @@ class TNSearchTableVC: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "note", let destination = segue.destination as? TNNewNoteVC, let indexPath = tableView.indexPathForSelectedRow{
-            destination.note = notes[indexPath.row]
+            destination.noteShort = notes[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: false)
         }
     }

@@ -48,11 +48,11 @@ class TNMapViewController: UIViewController {
         guard let identifier = segue.identifier else {return}
         switch identifier {
         case "note":
-            if let note = sender as? TNNote, let destination = segue.destination as? TNNewNoteVC {
-                destination.note = note
+            if let note = sender as? TNNote.Short, let destination = segue.destination as? TNNewNoteVC {
+                destination.noteShort = note
             }
         case "search":
-            if let notes = sender as? [TNNote], let destination = segue.destination as? TNSearchTableVC{
+            if let notes = sender as? [TNNote.Short], let destination = segue.destination as? TNSearchTableVC{
                 destination.notes = notes
                 destination.showSearch = false
             }

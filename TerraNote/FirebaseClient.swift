@@ -21,59 +21,55 @@ class FirebaseClient {
     
     // MARK: Note Query Functions
     
-    static func queryNotes (by property: TNNote.Property, with search: String, completion: @escaping ([TNNote])->()) {
+    static func getNote (withID id: String, completion: @escaping (TNNote?)->()) {
+        notes.child(id).observeSingleEvent(of: .value, with: {snapshot in
+            if let noteData = snapshot.value as? JSON,
+                let note = TNNote.makeWith(id: id, data: noteData){
+                completion(note)
+            } else {
+                completion(nil)
+            }
+        })
+    }
+    
+    static func queryNotes (by property: TNNote.Property, with search: String, completion: @escaping ([TNNote.Short])->()) {
         currentUser.child(TNUser.Property.notes.rawValue).observeSingleEvent(of: .value, with: { snapshot in
             if let data = snapshot.value as? JSON {
-                let ids = data.keys
-                var output: [TNNote] = []
-                for id in ids {
-                    guard var noteData = data[id] as? JSON else {continue}
-                    var filterFn: (JSON,String,String)->TNNote?
-                    switch property{
-                    case .id:
-                        filterFn = filterByID(data:id:target:)
-                    case .date:
-                        filterFn = filterByDate(data:id:target:)
-                    default:
-                        noteData["property"] = property.rawValue
-                        filterFn = filterbyRelevance(data:id:target:)
-                    }
-                    if let note = filterFn(noteData, id, search){
-                        output.append(note)
-                        if property == .id { break }
-                    }
+                switch property{
+                case .id:
+                    completion(filterByID(data: data, target: search))
+                case .date:
+                    completion(filterByDate(data: data, target: search))
+                case .channel:
+                    queryChannelForNotes(name: search, completion: completion)
+                default:
+                    break
+                    //noteData["property"] = property.rawValue
+                    //filterFn = filterbyRelevance(data:target:completion:)
                 }
-                completion(output)
             }
         })
     }
     
-    static func query(user uid: String, forNote noteID: String, completion: @escaping (TNNote?)->()){
-        users.child(uid).observeSingleEvent(of: .value, with: { snapshot in
-            if let data = snapshot.value as? JSON{
-                let ids = data.keys
-                for id in ids {
-                    guard let noteData = data[id] as? JSON else {continue}
-                    if let note = filterByID(data: noteData, id: id, target: noteID){
-                        completion(note)
-                        return
-                    }
-                }
-            }
-            completion(nil)
-        })
-    }
+//    static func query(user uid: String, forNote noteID: String, completion: @escaping (TNNote?)->()){
+//        users.child(uid).observeSingleEvent(of: .value, with: { snapshot in
+//            if let data = snapshot.value as? JSON{
+//                getNote(withID: noteID, completion: completion)
+//            }
+//            completion(nil)
+//        })
+//    }
     
-    static func queryList(ofIDs ids: [String], forUser uid: String, completion: @escaping ([TNNote])->()) {
+    static func queryList(ofIDs ids: [String], forUser uid: String, completion: @escaping ([TNNote.Short])->()) {
         // this is used to get ids for the popup preview menu and probably the note list view
         users.child(uid).observeSingleEvent(of: .value, with: {snapshot in
             if let data = snapshot.value as? JSON {
                 let idKeys = data.keys
-                var output: [TNNote] = []
+                var output: [TNNote.Short] = []
                 idKeys.forEach({ id in
                     if ids.contains(where: {$0 == id}),
                         let noteData = data[id] as? JSON,
-                        let note = TNNote.makeWith(id: id, data: noteData){
+                        let note = TNNote.Short.makeWith(id: id, data: noteData){
                         output.append(note)
                     }
                 })
@@ -133,7 +129,7 @@ class FirebaseClient {
                         case .members:
                             //NOTE: Cannot search members by id. Users will never have access to this
                             shouldAppend = channel.members.contains(where: {
-                                $0.email == value.toFBEmailFormat() ?? " "
+                                $0.email == value
                             })
                         case .name:
                             shouldAppend = channel.name == value
@@ -143,6 +139,7 @@ class FirebaseClient {
                         if shouldAppend {
                             output.append(channel)
                         }
+                        completion(output)
                     }
                 }
             }
@@ -170,32 +167,62 @@ class FirebaseClient {
     }
     
     // MARK: Filter Functions
-    private static func filterByID(data: JSON, id: String, target: String)->TNNote? {
-        var toReturn: TNNote? = nil
-        if target == id{
-            notes.child(id).observeSingleEvent(of: .value, with: {snapshot in
-                if let noteData = snapshot.value as? JSON {
-                    toReturn = TNNote.makeWith(id: id, data: noteData)
-                }
-            })
+    private static func filterByID(data: JSON, target: String)-> [TNNote.Short] {
+        var found: Bool = false
+        for noteData in data {
+            if target == noteData.key,
+                let noteValues = noteData.value as? JSON,
+                let note = TNNote.Short.makeWith(id: target, data: noteValues){
+                return [note]
+            }
         }
-        return toReturn
+        return []
     }
     
-    private static func filterByDate(data: JSON, id: String, target: String)->TNNote? {
-        if let noteShort = TNNote.Short.makeWith(id: id, data: data),
-            let targetParse = target.components(separatedBy: "T").first,
-            let dateParse = noteShort.date.components(separatedBy: "T").first,
-            dateParse.contains(targetParse) {
-            var note: TNNote? = nil
-            notes.child(id).observeSingleEvent(of: .value, with: {snapshot in
-                if let noteData = snapshot.value as? JSON {
-                    note = TNNote.makeWith(id: id, data: noteData)
+    private static func filterByDate(data: JSON, target: String)->[TNNote.Short] {
+        var notes: [TNNote.Short] = []
+        for key in data.keys {
+            if let noteData = data[key] as? JSON,
+                let noteShort = TNNote.Short.makeWith(id: key, data: noteData),
+                let targetParse = target.components(separatedBy: "T").first,
+                let dateParse = noteShort.date.components(separatedBy: "T").first,
+                dateParse.contains(targetParse),
+                let note = TNNote.Short.makeWith(id: key, data: noteData){
+                notes.append(note)
+            }
+        }
+        return notes
+    }
+    
+    static func queryChannelForNotes(name: String, completion: @escaping ([TNNote.Short])->()) {
+        // first get the channels the user is in and see if there is a channel containing that name.
+        currentUser.child(TNUser.Property.channels.rawValue).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let channelData = snapshot.value as? JSON else { completion([]); return}
+            var myChannels: [TNChannel] = []
+            channelData.forEach({ (channelID, channelValueData) in
+                if let channelValues = channelValueData as? JSON,
+                    let channel = TNChannel.makeWith(id: channelID, dict: channelValues){
+                    myChannels.append(channel)
                 }
             })
-            return note
-        }
-        return nil
+            if let channel = myChannels.filter({ $0.name == name }).first {
+                // then ask that channel for all its notes
+                let notesKey = TNChannel.Property.notes.rawValue
+                channels.child(channel.id).child(notesKey).observeSingleEvent(of: .value, with: {noteSnapshot in
+                    guard let notesData = noteSnapshot.value as? JSON else { completion([]); return}
+                    var notes: [TNNote.Short] = []
+                    notesData.forEach({(id, values) in
+                        if let values = values as? JSON,
+                            let note  = TNNote.Short.makeWith(id: id, data: values){
+                            notes.append(note)
+                        }
+                    })
+                    // return those notes in the completion
+                    completion(notes)
+                })
+            }
+            
+        })
     }
     
     private static func filterbyRelevance(data: JSON, id: String, target: String)->TNNote?  {
