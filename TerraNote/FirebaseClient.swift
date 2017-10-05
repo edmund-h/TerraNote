@@ -42,6 +42,8 @@ class FirebaseClient {
                     completion(filterByDate(data: data, target: search))
                 case .channel:
                     queryChannelForNotes(name: search, completion: completion)
+                case .title:
+                    completion(filterByTitle(data: data, target: search))
                 default:
                     break
                     //noteData["property"] = property.rawValue
@@ -51,18 +53,9 @@ class FirebaseClient {
         })
     }
     
-//    static func query(user uid: String, forNote noteID: String, completion: @escaping (TNNote?)->()){
-//        users.child(uid).observeSingleEvent(of: .value, with: { snapshot in
-//            if let data = snapshot.value as? JSON{
-//                getNote(withID: noteID, completion: completion)
-//            }
-//            completion(nil)
-//        })
-//    }
-    
     static func queryList(ofIDs ids: [String], forUser uid: String, completion: @escaping ([TNNote.Short])->()) {
         // this is used to get ids for the popup preview menu and probably the note list view
-        users.child(uid).observeSingleEvent(of: .value, with: {snapshot in
+        notes.child(uid).observeSingleEvent(of: .value, with: {snapshot in
             if let data = snapshot.value as? JSON {
                 let idKeys = data.keys
                 var output: [TNNote.Short] = []
@@ -109,7 +102,8 @@ class FirebaseClient {
     }
     
     static func remove(user: TNUser, fromChannel channel: TNChannel) {
-        
+        channels.child(channel.id).removeValue()
+        users.child(user.id).child(TNUser.Property.channels.rawValue).child(channel.id).removeValue()
     }
     
     static func queryChannels(byProperty property: TNChannel.Property, withValue value: String, completion: @escaping ([TNChannel])->()) {
@@ -168,7 +162,6 @@ class FirebaseClient {
     
     // MARK: Filter Functions
     private static func filterByID(data: JSON, target: String)-> [TNNote.Short] {
-        var found: Bool = false
         for noteData in data {
             if target == noteData.key,
                 let noteValues = noteData.value as? JSON,
@@ -225,19 +218,16 @@ class FirebaseClient {
         })
     }
     
-    private static func filterbyRelevance(data: JSON, id: String, target: String)->TNNote?  {
-        // TODO: Fix this
-//        if let property = data["property"] as? String,
-//            let value = data[property] as? String,
-//            let note = TNNote.makeWith(id: id, data: data) {
-//            let valueParsed = value.lowercased()
-//            let targetParsed = target.lowercased()
-//            if valueParsed.contains(targetParsed){
-//                return note
-//            }
-//        }
-        return nil
-        
+    private static func filterByTitle(data: JSON, target: String)->[TNNote.Short] {
+        var output: [TNNote.Short] = []
+        data.forEach { (id, values) in
+            if let values = values as? [String:String],
+                let note = TNNote.Short.makeWith(id: id, data: values),
+                note.title.contains(target){
+                    output.append(note)
+            }
+        }
+        return output
     }
 }
     /*
