@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "528994712.243877"
+            timestampString = "528995667.940368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "528994712.24395"
+            timestampString = "528995667.940451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -128,6 +128,102 @@
             startingLineNumber = "69"
             endingLineNumber = "69"
             landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TerraNote/TNMapViewController.swift"
+            timestampString = "528995667.940535"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "mapView(_:didSelect:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TerraNote/TNMapViewController.swift"
+            timestampString = "528995667.940588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "mapView(_:didSelect:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;TerraNote.TNNote.Short&gt;) -&gt; () in TerraNote.TNMapViewController.mapView(__ObjC.MKMapView, didSelect: __ObjC.MKAnnotationView) -&gt; ()"
+                  moduleName = "TerraNote"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
+                  timestampString = "528995668.033917"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "42">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TerraNote.TNNote.Short) -&gt; Swift.String in closure #1 (Swift.Array&lt;TerraNote.TNNote.Short&gt;) -&gt; () in TerraNote.TNMapViewController.mapView(__ObjC.MKMapView, didSelect: __ObjC.MKAnnotationView) -&gt; ()"
+                  moduleName = "TerraNote"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
+                  timestampString = "528995668.037479"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "79">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TerraNote/FirebaseClient.swift"
+            timestampString = "528995667.940643"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "queryList(ofIDs:forUser:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TerraNote/FirebaseClient.swift"
+            timestampString = "528995667.940959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "queryList(ofIDs:forUser:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

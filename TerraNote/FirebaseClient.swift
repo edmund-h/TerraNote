@@ -54,8 +54,9 @@ class FirebaseClient {
     }
     
     static func queryList(ofIDs ids: [String], forUser uid: String, completion: @escaping ([TNNote.Short])->()) {
-        // this is used to get ids for the popup preview menu and probably the note list view
-        notes.child(uid).observeSingleEvent(of: .value, with: {snapshot in
+        // this is used to get ids for the popup preview menu and probably the note list view when looking for another user's notes
+        let notesKey = TNUser.Property.notes.rawValue
+        users.child(uid).child(notesKey).observeSingleEvent(of: .value, with: {snapshot in
             if let data = snapshot.value as? JSON {
                 let idKeys = data.keys
                 var output: [TNNote.Short] = []
