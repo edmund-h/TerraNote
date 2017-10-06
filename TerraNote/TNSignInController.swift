@@ -51,7 +51,8 @@ extension TNSignInController: GIDSignInDelegate {
             if let email = user?.email, let uid = user?.uid {
                 UserDefaults.standard.setValue(email, forKey: "email")
                 UserDefaults.standard.set(uid, forKey: "uid")
-                Database.database().reference().child("users").child(TNUser.Property.email.rawValue).setValue(email)
+                let emailkey =  TNUser.Property.email.rawValue
+                Database.database().reference().child("users").child(uid).child(emailkey).setValue(email)
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: nil)
                 }

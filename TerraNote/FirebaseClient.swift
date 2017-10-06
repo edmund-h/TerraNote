@@ -78,13 +78,19 @@ class FirebaseClient {
     }
     
     static func pushNew(note: TNNote)-> String{
-        let newNote = notes.childByAutoId()
-        newNote.setValue(note.values)
-        currentUser.child(TNUser.Property.notes.rawValue).setValue(note.short.values)
+        //create a child with a random key and save that key to memory
+        let newNoteLoc = notes.childByAutoId()
+        let idKey = newNoteLoc.key
+        //set the note's data at its location in notes directory
+        newNoteLoc.setValue(note.values)
+        //create shortform entries in the appropriate user and channel directories
+        let newNoteShort = TNNote.Short(id: idKey, title: note.title, date: note.date)
+        currentUser.child(TNUser.Property.notes.rawValue).updateChildValues(newNoteShort.values)
         if let channel = note.channel {
-            channels.child(channel.id).child(TNChannel.Property.notes.rawValue).setValue(note.short.values)
+            let channelIDKey = TNChannel.Property.notes.rawValue
+            channels.child(channel.id).child(channelIDKey).updateChildValues(newNoteShort.values)
         }
-        return newNote.key
+        return idKey
     }
     
     // MARK: Channel Functions

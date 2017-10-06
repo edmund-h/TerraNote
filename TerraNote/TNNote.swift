@@ -77,6 +77,7 @@ struct TNNote {
             }
             return nil
         }
+        //these should also use the TNNote.Property enum for their firebase keys.
     }
     
     enum Property: String {

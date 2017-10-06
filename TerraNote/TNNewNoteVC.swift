@@ -68,6 +68,7 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
                 self.sendNewNoteToFirebase(placemark: placemark)
             })
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func sendNewNoteToFirebase(placemark: CLPlacemark?) {
@@ -76,7 +77,7 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
         let date = ISO8601DateFormatter().string(from: Date())
         if let placemark = placemark, let location = placemark.location {
             let addr = placemark.address ?? "Unknown Location"
-            let note = TNNote(id: "nil", creator: "nil", title: title, date: date, location: addr, content: content, channel: nil )
+            let note = TNNote(id: "nil", creator: TNUser.currentUserEmail, title: title, date: date, location: addr, content: content, channel: nil )
             let id = FirebaseClient.pushNew(note: note)
             let coord = location.coordinate
             GeoFireClient.addLocation(noteID: id, coordinate: coord)
