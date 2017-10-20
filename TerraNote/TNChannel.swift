@@ -28,24 +28,24 @@ struct TNChannel {
     
     static func makeWith (id: String, dict: [String:Any])-> TNChannel? {
         if let name = dict[Property.name.rawValue] as? String,
-            let memberDict = dict[Property.members.rawValue] as? [String:Any],
-            let noteDict = dict[Property.notes.rawValue] as? [String:Any]{
+            let memberDict = dict[Property.members.rawValue] as? [String:Any]{
             var channel = TNChannel(id: id, name: name,  members: [], notes: [])
             memberDict.forEach({key, value in
-                if let value = value as? String,
-                    let email = value.fromFBEmailFormat() {
+                if let email = value as? String{
                     let user = TNUser(email: email, id: id, channels: [], blocklist: [], notes: [] )
                     channel.members.append(user)
                 }
             })
-            noteDict.forEach({ key, value in
-                if let value = value as? [String:String],
-                    let title = value.keys.first,
-                    let date = value.values.first {
-                    let note = TNNote.Short(id: key, title: title, date: date)
-                    channel.notes.append(note)
-                }
-            })
+            if let noteDict = dict[Property.notes.rawValue] as? [String:Any]{
+                noteDict.forEach({ key, value in
+                    if let value = value as? [String:String],
+                        let title = value.keys.first,
+                        let date = value.values.first {
+                        let note = TNNote.Short(id: key, title: title, date: date)
+                        channel.notes.append(note)
+                    }
+                })
+            }
             return channel
         }
         

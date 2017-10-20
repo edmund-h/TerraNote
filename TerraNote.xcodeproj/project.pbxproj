@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B13B1F633A00FE297D3C323 /* Pods_TerraNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D615863EA4EBCB26AAC849F0 /* Pods_TerraNoteTests.framework */; };
-		880EEB881F8000B80020B012 /* TNChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880EEB871F8000B80020B012 /* TNChannelVC.swift */; };
+		880EEB881F8000B80020B012 /* TNChannelSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880EEB871F8000B80020B012 /* TNChannelSearchVC.swift */; };
 		8848F1E61F84F2E000189458 /* TNObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848F1E51F84F2E000189458 /* TNObjects.swift */; };
 		885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885942111F67C46B003F105F /* TNSearchTableVC.swift */; };
 		88916C9B1F7FE93200F5D5A9 /* TNChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88916C9A1F7FE93200F5D5A9 /* TNChannelCellView.xib */; };
@@ -57,7 +57,7 @@
 		416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.release.xcconfig"; sourceTree = "<group>"; };
 		46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
-		880EEB871F8000B80020B012 /* TNChannelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNChannelVC.swift; sourceTree = "<group>"; };
+		880EEB871F8000B80020B012 /* TNChannelSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNChannelSearchVC.swift; sourceTree = "<group>"; };
 		8848F1E51F84F2E000189458 /* TNObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNObjects.swift; sourceTree = "<group>"; };
 		885942111F67C46B003F105F /* TNSearchTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSearchTableVC.swift; sourceTree = "<group>"; };
 		88916C9A1F7FE93200F5D5A9 /* TNChannelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TNChannelCellView.xib; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		885942151F67C4CD003F105F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				880EEB871F8000B80020B012 /* TNChannelVC.swift */,
+				880EEB871F8000B80020B012 /* TNChannelSearchVC.swift */,
 				88D0DB641F5F7C0F00F55603 /* TNMapViewController.swift */,
 				88D0DB9F1F5F87C400F55603 /* TNSignInController.swift */,
 				885942111F67C46B003F105F /* TNSearchTableVC.swift */,
@@ -482,7 +482,7 @@
 				88D0DB9A1F5F7DB700F55603 /* GFGeoHash.m in Sources */,
 				88D0DBAC1F606F9000F55603 /* CoreLocClient.swift in Sources */,
 				88D0DBB41F60C8D400F55603 /* TNAnnotation.swift in Sources */,
-				880EEB881F8000B80020B012 /* TNChannelVC.swift in Sources */,
+				880EEB881F8000B80020B012 /* TNChannelSearchVC.swift in Sources */,
 				88D0DBB21F609D6500F55603 /* Extensions.swift in Sources */,
 				88F8EAF71F7E70F90061D863 /* TNLocationSearchVC.swift in Sources */,
 				88C278081F6B18D700C7C9C3 /* TNUser.swift in Sources */,

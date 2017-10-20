@@ -80,17 +80,17 @@
                         <outlet property="searchButton" destination="ltl-ha-0nK" id="lS7-Ge-gJo"/>
                         <segue destination="pmr-Lh-IZi" kind="presentation" identifier="location" modalPresentationStyle="overCurrentContext" id="Wdf-8w-ajP"/>
                         <segue destination="gQi-xl-nLu" kind="show" identifier="search" id="Isa-CI-EzL"/>
-                        <segue destination="g2H-4M-w0X" kind="show" identifier="channel" id="0cf-cT-PTK"/>
+                        <segue destination="g2H-4M-w0X" kind="show" identifier="channel" id="4WU-93-cEO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="972" y="55.322338830584712"/>
         </scene>
-        <!--ChannelVC-->
+        <!--Channel SearchVC-->
         <scene sceneID="hoc-hW-12G">
             <objects>
-                <viewController id="g2H-4M-w0X" customClass="TNChannelVC" customModule="TerraNote" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g2H-4M-w0X" customClass="TNChannelSearchVC" customModule="TerraNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1xo-Ai-lkT"/>
                         <viewControllerLayoutGuide type="bottom" id="vqx-Qw-vkt"/>
@@ -158,15 +158,16 @@
                     <navigationItem key="navigationItem" id="ld5-QA-kik">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="0W5-I4-gaF">
                             <connections>
-                                <action selector="newChannelButtonClicked" destination="g2H-4M-w0X" id="lbm-Ty-To6"/>
+                                <action selector="newChannelButtonClicked" destination="g2H-4M-w0X" id="OBY-0K-KJB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchAreaHeight" destination="PmX-cp-w3T" id="aW0-p0-Ly5"/>
-                        <outlet property="searchBar" destination="cks-qo-0uu" id="Bxu-Ea-1Tm"/>
-                        <outlet property="searchType" destination="ekM-hB-T5N" id="Q3X-8N-Hrp"/>
-                        <outlet property="tableView" destination="ECK-s9-rd3" id="wrm-Ny-hRp"/>
+                        <outlet property="newChannelButton" destination="0W5-I4-gaF" id="WBr-yI-pZ9"/>
+                        <outlet property="searchAreaHeight" destination="PmX-cp-w3T" id="1aw-Yq-9Lf"/>
+                        <outlet property="searchBar" destination="cks-qo-0uu" id="wrF-TV-j9c"/>
+                        <outlet property="searchType" destination="ekM-hB-T5N" id="Y4u-sX-sGE"/>
+                        <outlet property="tableView" destination="ECK-s9-rd3" id="GMq-cF-tXK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPJ-Ba-FKM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -507,6 +508,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JPA-aB-MSx"/>
+        <segue reference="OeF-dN-If3"/>
     </inferredMetricsTieBreakers>
 </document>

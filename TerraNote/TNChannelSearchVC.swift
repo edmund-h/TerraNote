@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TNChannelVC: UIViewController {
+class TNChannelSearchVC: UIViewController {
    
     
     @IBOutlet weak var tableView: UITableView!
@@ -31,10 +31,13 @@ class TNChannelVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "channelCell")
+        
+        FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
+            self.channels = channels
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +78,7 @@ class TNChannelVC: UIViewController {
 }
 
 // MARK: TableView Functions
-extension TNChannelVC: UITableViewDelegate, UITableViewDataSource {
+extension TNChannelSearchVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

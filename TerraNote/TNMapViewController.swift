@@ -62,7 +62,7 @@ class TNMapViewController: UIViewController {
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         
-        FTPopOverMenu.showForSender(sender: sender, with: ["My Location!", "Find Location","Find Note","Find Channel","Find User"], done: { option in
+        FTPopOverMenu.showForSender(sender: sender, with: ["My Location!", "Find Location","Find Note","Change Channel"], done: { option in
             switch option{
             case 0:
                 self.mapView.setUserTrackingMode( .follow , animated: true)
@@ -72,8 +72,6 @@ class TNMapViewController: UIViewController {
                 self.performSegue(withIdentifier: "search", sender: nil)
             case 3:
                 self.performSegue(withIdentifier: "channel", sender: nil)
-            case 4:
-                print("find user segue goes here")
             default:
                 print("oops!")
             }

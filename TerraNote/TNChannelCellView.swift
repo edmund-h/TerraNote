@@ -54,11 +54,13 @@ class TNChannelCellView: UIView {
     func setUpMembersList(with email: String? = nil) {
         var memberText = ""
         //first, check if user is a member
-        if let channel = channel, channel.members.contains(where: {$0.id == TNUser.currentUserID}){
+        guard let channel = channel else { return }
+        if channel.members.contains(where: {$0.id == TNUser.currentUserID}){
             memberText = "You, "
         }
         //then, display the first email in the member list or the sought email
-        if let emailFirst = channel?.members.first?.email {
+        if let emailFirst = channel.members.first?.email,
+            emailFirst != TNUser.currentUserEmail {
             if let email = email, emailFirst != email {
                 memberText.append(email)
             } else {
@@ -66,11 +68,13 @@ class TNChannelCellView: UIView {
             }
         }
         //display additional info about members if needed
-        if let emailSecond = channel?.members[1].email {
+        let memberCount = channel.members.count
+        if memberCount > 1{
+            let emailSecond = channel.members[1].email
             memberText.append(", \(emailSecond)")
         }
-        if let count = channel?.members.count, count > 2 {
-            memberText.append(", and \(count - 2) others.")
+        if memberCount > 2 {
+            memberText.append(", and \(memberCount - 2) others.")
         }
     }
     
