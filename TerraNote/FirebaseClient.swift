@@ -99,7 +99,7 @@ class FirebaseClient {
         let uid = TNUser.currentUserID
         let email = TNUser.currentUserEmail
         currentUser.child(TNUser.Property.channels.rawValue).setValue([channel.id : channel.name])
-        channels.child(channel.id).child(TNChannel.Property.members.rawValue).setValue([uid : email.toFBEmailFormat()])
+        channels.child(channel.id).child(TNChannel.Property.members.rawValue).setValue([uid : email])
     }
     
     static func add(channelNamed name: String) {
