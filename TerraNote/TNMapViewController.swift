@@ -79,7 +79,7 @@ class TNMapViewController: UIViewController {
     }
     
     // MARK: Helper functions
-    func changeLocation(notification: Notification) {
+    @objc func changeLocation(notification: Notification) {
         var location: String = ""
         if let info = notification.userInfo, let myLocation = info["location"] as? String {
             location = myLocation

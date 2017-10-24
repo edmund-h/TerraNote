@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Make Nav bar brown with white buttons and text
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.barTintColor = UIColor.chocolate
-        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UIApplication.shared.statusBarStyle = .lightContent
         return true
     }

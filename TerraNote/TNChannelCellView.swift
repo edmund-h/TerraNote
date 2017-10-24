@@ -55,8 +55,10 @@ class TNChannelCellView: UIView {
         var memberText = ""
         //first, check if user is a member
         guard let channel = channel else { return }
+        let memberCount = channel.members.count
         if channel.members.contains(where: {$0.id == TNUser.currentUserID}){
-            memberText = "You, "
+            memberText = "You"
+            if memberCount > 1 {memberText.append(", ")}
         }
         //then, display the first email in the member list or the sought email
         if let emailFirst = channel.members.first?.email,
@@ -68,14 +70,15 @@ class TNChannelCellView: UIView {
             }
         }
         //display additional info about members if needed
-        let memberCount = channel.members.count
         if memberCount > 1{
             let emailSecond = channel.members[1].email
             memberText.append(", \(emailSecond)")
         }
         if memberCount > 2 {
-            memberText.append(", and \(memberCount - 2) others.")
+            memberText.append(", and \(memberCount - 2) more.")
         }
+        
+        membersLabel.text = memberText
     }
     
     @IBAction func joinedButtonTapped(sender: UIButton) {

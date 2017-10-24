@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "530222323.561873"
+            timestampString = "530560333.613509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "530222323.561952"
+            timestampString = "530560333.613619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "530222323.562061"
+            timestampString = "530560333.61375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TerraNote/TNMapViewController.swift"
-            timestampString = "530222323.562134"
+            timestampString = "530560333.613807"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
@@ -170,7 +170,7 @@
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
-                  timestampString = "530223359.526207"
+                  timestampString = "530560608.247134"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "143"
@@ -185,7 +185,7 @@
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
-                  timestampString = "530223359.529552"
+                  timestampString = "530560608.25042"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "143"
@@ -233,110 +233,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TerraNote/TNChannelSearchVC.swift"
-            timestampString = "530223359.452611"
+            filePath = "TerraNote/TNChannelCellView.swift"
+            timestampString = "530560608.092887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "channels"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TerraNote/TNChannelSearchVC.swift"
-            timestampString = "530223359.452797"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "setUpMembersList(with:)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "TerraNote.TNChannelSearchVC.viewDidLoad() -&gt; ()"
+                  symbolName = "TerraNote.TNChannelCellView.setUpMembersList(with: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelSearchVC.swift"
-                  timestampString = "530223359.555803"
+                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelCellView.swift"
+                  timestampString = "530560608.270646"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "817">
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "651">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;TerraNote.TNChannel&gt;) -&gt; () in TerraNote.TNChannelSearchVC.viewDidLoad() -&gt; ()"
+                  symbolName = "closure #1 (TerraNote.TNUser) -&gt; Swift.Bool in TerraNote.TNChannelCellView.setUpMembersList(with: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelSearchVC.swift"
-                  timestampString = "530223359.560038"
+                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelCellView.swift"
+                  timestampString = "530560608.273946"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "18">
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "82">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TerraNote/TNChannelSearchVC.swift"
-            timestampString = "530223359.452891"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TerraNote/FirebaseClient.swift"
-            timestampString = "530222390.78197"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "queryChannels(byProperty:withValue:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TerraNote/TNChannel.swift"
-            timestampString = "530223359.453012"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "makeWith(id:dict:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
