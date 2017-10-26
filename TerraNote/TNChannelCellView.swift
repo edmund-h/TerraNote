@@ -90,7 +90,7 @@ class TNChannelCellView: UIView {
     @IBAction func joinedButtonTapped(sender: UIButton) {
         guard let channel = channel else { return }
         let notificationName = Notification.Name("ChannelCellJoinedButtonTapped")
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["id": channel.id, "joined": !joined])
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["id": channel.id, "name": channel.name, "joined": !joined])
         //note that the notification will pass the state that is DESIRED:
         //if the user is not in the channel, it will pass TRUE
         //if the user is leaving the channel, it will pass FALSE
@@ -99,6 +99,9 @@ class TNChannelCellView: UIView {
     @IBAction func notesButtonTapped(sender: UIButton) {
         guard let channel = channel else { return }
         let notificationName = Notification.Name("ChannelCellNotesButtonTapped")
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["id": channel.id, "joined": !joined])
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["id": channel.id, "joined": joined])
+        //note that the notification will pass the CURRENT STATE
+        //if the user is in the channel it will pass TRUE
+        //if the user is not in the chennel it will pass FALSE
     }
 }

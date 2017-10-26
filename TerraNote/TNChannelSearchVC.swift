@@ -38,6 +38,12 @@ class TNChannelSearchVC: UIViewController {
         FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
             self.channels = channels
         })
+        
+        let joinedNotification = Notification.Name("ChannelCellJoinedButtonTapped")
+        let changeNotification = Notification.Name("ChannelCellNotesButtonTapped")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tryJoinLeaveChannel) , name: joinedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tryChangeChannel), name: changeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +81,76 @@ class TNChannelSearchVC: UIViewController {
         }))
         self.present(infoAlert, animated: true, completion: nil)
     }
+    
+    @objc func tryChangeChannel(notification: Notification) {
+        if let channelID = notification.userInfo?["id"] as? String,
+            let joined = notification.userInfo?["joined"] as? Bool {
+            if !joined {
+                let alert = UIAlertController(title: "Switch Channels", message: "You are not yet in this channel. Would you like to join in order to switch to this channel?", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                    UserDefaults.standard.setValue(channelID, forKey: "currentChannel")
+                    alert.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                })
+                let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: {_ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                UserDefaults.setValue(channelID, forKey: "currentChannel")
+                navigationController?.popToRootViewController(animated: true)
+            }
+        } else {
+            UserDefaults.setValue(nil, forKey: "currentChannel")
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
+    @objc func tryJoinLeaveChannel(notification: Notification) {
+        if let channelID = notification.userInfo?["id"] as? String,
+            let channelName = notification.userInfo?["name"] as? String,
+            let joined = notification.userInfo?["joined"] as? Bool {
+            let channel = TNChannel(id: channelID, name: channelName, members: [], notes: [])
+            if joined {
+                let alert = UIAlertController(title: "Join Channel", message: "Would you like to switch to this channel now?", preferredStyle: .alert)
+                let joinSwitch = UIAlertAction(title: "Join and Switch", style: .default, handler: {_ in
+                    FirebaseClient.join(channel: channel)
+                    UserDefaults.standard.set(channelID, forKey: "currentChannel")
+                    alert.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                })
+                let join = UIAlertAction(title: "Join Only", style: .default, handler: { _ in
+                    FirebaseClient.join(channel: TNChannel(id: channelID, name: channelName, members: [], notes: []))
+                    alert.dismiss(animated: true, completion: nil)
+                    self.tableView.reloadData()
+                })
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+                alert.addAction(joinSwitch)
+                alert.addAction(join)
+                alert.addAction(cancel)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Leave Channel", message: "When you leave this channel, you will still be able to see your notes from this channel in 'my notes' and others in the channel will still be able to see your notes when switched to that channel. You can remove them from the channel individually.\n\nAre you sure you want to leave the channel?", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+                    FirebaseClient.remove(user: TNUser.currentUserFull, fromChannel: channel)
+                    alert.dismiss(animated: true, completion: nil)
+                    self.tableView.reloadData()
+                })
+                let cancelAction = UIAlertAction(title: "No", style: .default, handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+            }
+        }
+    }
 }
+
+
 
 // MARK: TableView Functions
 extension TNChannelSearchVC: UITableViewDelegate, UITableViewDataSource {
