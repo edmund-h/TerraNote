@@ -170,7 +170,7 @@
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
-                  timestampString = "530560608.247134"
+                  timestampString = "530738211.472746"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "143"
@@ -185,7 +185,7 @@
                   moduleName = "TerraNote"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNMapViewController.swift"
-                  timestampString = "530560608.25042"
+                  timestampString = "530738211.475584"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "143"
@@ -225,54 +225,6 @@
             endingLineNumber = "57"
             landmarkName = "queryList(ofIDs:forUser:completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TerraNote/TNChannelCellView.swift"
-            timestampString = "530560608.092887"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "setUpMembersList(with:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TerraNote.TNChannelCellView.setUpMembersList(with: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "TerraNote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelCellView.swift"
-                  timestampString = "530560608.270646"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "651">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (TerraNote.TNUser) -&gt; Swift.Bool in TerraNote.TNChannelCellView.setUpMembersList(with: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "TerraNote"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edmund/Documents/TerraNote/TerraNote/TNChannelCellView.swift"
-                  timestampString = "530560608.273946"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "82">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

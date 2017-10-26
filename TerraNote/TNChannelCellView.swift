@@ -15,13 +15,15 @@ class TNChannelCellView: UIView {
     @IBOutlet weak var infoArea: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var membersLabel: UILabel!
-    @IBOutlet weak var notesLabel: UILabel!
+    @IBOutlet weak var notesButton: UIButton!
     @IBOutlet weak var joinedButton: UIButton!
     
     var channel: TNChannel? = nil {
         didSet {
             nameLabel.text = channel?.name ?? "no channel"
-            notesLabel.text = "\(channel?.notes.count ?? 0) Notes"
+            
+            notesButton.setTitle("\(channel?.notes.count ?? 0) Notes", for: .normal)
+            
             joined = channel?.members.contains(where: {$0.id == TNUser.currentUserID}) ?? false
             if joined {
                 joinedButton.titleLabel?.text = "Leave"
@@ -49,6 +51,10 @@ class TNChannelCellView: UIView {
         contentView.addAndConstrainTo(view: self)
         infoArea.layer.cornerRadius = 5
         joinedButton.layer.cornerRadius = 5
+        
+        notesButton.layer.borderWidth = 2
+        notesButton.layer.borderColor = UIColor.white.cgColor
+        notesButton.layer.cornerRadius = 5
     }
     
     func setUpMembersList(with email: String? = nil) {
@@ -88,5 +94,11 @@ class TNChannelCellView: UIView {
         //note that the notification will pass the state that is DESIRED:
         //if the user is not in the channel, it will pass TRUE
         //if the user is leaving the channel, it will pass FALSE
+    }
+    
+    @IBAction func notesButtonTapped(sender: UIButton) {
+        guard let channel = channel else { return }
+        let notificationName = Notification.Name("ChannelCellNotesButtonTapped")
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["id": channel.id, "joined": !joined])
     }
 }
