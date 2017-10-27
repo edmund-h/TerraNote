@@ -25,11 +25,14 @@ class TNChannelCellView: UIView {
             notesButton.setTitle("\(channel?.notes.count ?? 0) Notes", for: .normal)
             
             joined = channel?.members.contains(where: {$0.id == TNUser.currentUserID}) ?? false
+            var buttonTitleText: String
             if joined {
-                joinedButton.titleLabel?.text = "Leave"
+                buttonTitleText = "Leave"
             } else {
-                joinedButton.titleLabel?.text = "Join"
+                buttonTitleText = "Join"
             }
+            
+            joinedButton.setTitle(buttonTitleText, for: .normal)
             setUpMembersList()
         }
     }
