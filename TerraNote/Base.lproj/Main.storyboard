@@ -73,7 +73,9 @@
                             <constraint firstItem="g8c-Kr-JZS" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="zYC-d3-miV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="TerraNote" id="fU0-Pc-dro"/>
+                    <navigationItem key="navigationItem" title="TerraNote" id="fU0-Pc-dro">
+                        <barButtonItem key="rightBarButtonItem" title="⚙️" id="hBX-OW-sfz"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="A8G-JI-ziL" id="Rob-9i-5bB"/>
                         <outlet property="mapView" destination="g8c-Kr-JZS" id="kqi-oa-kiG"/>
