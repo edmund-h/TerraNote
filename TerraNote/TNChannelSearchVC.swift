@@ -44,7 +44,7 @@ class TNChannelSearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        changeSearchType()
+        changeSearchType(self)
         
     }
     
@@ -136,7 +136,7 @@ class TNChannelSearchVC: UIViewController {
         }
     }
     
-    @IBAction func changeSearchType() {
+    @IBAction func changeSearchType(_ sender: Any) {
         let index = searchType.selectedSegmentIndex
         if index == 0 {
             FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in

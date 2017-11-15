@@ -113,7 +113,7 @@
                                 </segments>
                                 <color key="tintColor" red="0.41176470590000003" green="0.2784313725" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="changeSearchType" destination="g2H-4M-w0X" eventType="touchUpInside" id="6wM-Fb-PbN"/>
+                                    <action selector="changeSearchType:" destination="g2H-4M-w0X" eventType="valueChanged" id="cxo-7q-Ill"/>
                                 </connections>
                             </segmentedControl>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cks-qo-0uu">

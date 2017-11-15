@@ -12,8 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TNSignInController" customModule="TerraNote" customModuleProvider="target">
             <connections>
+                <outlet property="doneButton" destination="CFD-PO-vgh" id="ozQ-lf-2PB"/>
                 <outlet property="googleButton" destination="9NW-Ls-dEy" id="UIJ-ha-EQz"/>
                 <outlet property="settingsContainerHeight" destination="ZPJ-aa-ahx" id="iu3-WC-JAx"/>
+                <outlet property="settingsContainerView" destination="ON0-9f-KXo" id="Af1-IX-G2Z"/>
+                <outlet property="signOutButton" destination="3oR-wj-X9L" id="jHe-Tn-aYs"/>
+                <outlet property="tableView" destination="5ZR-8Y-q7G" id="phm-EK-ile"/>
                 <outlet property="view" destination="iN0-l3-epB" id="zoU-ZF-bdS"/>
             </connections>
         </placeholder>
