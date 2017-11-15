@@ -14,9 +14,9 @@ class TNChannelSearchVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var searchAreaHeight: NSLayoutConstraint!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchType: UISegmentedControl!
+    @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
     
     @IBOutlet weak var newChannelButton: UIBarButtonItem!
     
@@ -27,17 +27,12 @@ class TNChannelSearchVC: UIViewController {
             }
         }
     }
-    var searchMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "channelCell")
-        
-        FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
-            self.channels = channels
-        })
         
         let joinedNotification = Notification.Name("ChannelCellJoinedButtonTapped")
         let changeNotification = Notification.Name("ChannelCellNotesButtonTapped")
@@ -49,19 +44,11 @@ class TNChannelSearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if searchMode == false {
-            searchAreaHeight.constant = 0
-            FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
-                self.channels = channels
-            })
-        } else {
-            newChannelButton.tintColor = UIColor.clear
-            newChannelButton.isEnabled = false
-        }
+        changeSearchType()
+        
     }
     
     @IBAction func newChannelButtonClicked() {
-        guard self.searchMode == false else {return}
         let infoAlert = UIAlertController(title: "Add Channel", message: "Channels are a way to share notes between people. Create a channel, and anyone can search for the channel name or your email to join, see your notes, and add their own. Do not use channels to share private data!", preferredStyle: .alert)
         infoAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
             _ in
@@ -148,6 +135,28 @@ class TNChannelSearchVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func changeSearchType() {
+        let index = searchType.selectedSegmentIndex
+        if index == 0 {
+            FirebaseClient.queryChannels(byProperty: .members, withValue: TNUser.currentUserEmail, completion: { channels in
+                self.channels = channels
+            })
+        } else {
+            self.channels = []
+        }
+        toggleSearchBarIfNeeded(show: index > 0)
+    }
+    
+    func toggleSearchBarIfNeeded(show: Bool){
+        var height: CGFloat = 0
+        if show {
+            height = 44
+        }
+        guard searchBarHeight.constant != height else { return }
+        searchBarHeight.constant = height
+        UIView.animate(withDuration: 0.2, animations: {self.view.layoutIfNeeded()})
+    }
 }
 
 
@@ -173,5 +182,18 @@ extension TNChannelSearchVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+}
+
+extension TNChannelSearchVC: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        var searchProperty: TNChannel.Property = .members
+        if searchType.selectedSegmentIndex == 1 {
+            searchProperty = .name
+        }
+        FirebaseClient.queryChannels(byProperty: searchProperty, withValue: text, completion: {channels in
+            self.channels = channels
+        })
     }
 }

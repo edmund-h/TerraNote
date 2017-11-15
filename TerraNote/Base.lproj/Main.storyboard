@@ -99,38 +99,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frq-mU-uay">
-                                <rect key="frame" x="0.0" y="64" width="320" height="88"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cks-qo-0uu">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ekM-hB-T5N">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-                                        <segments>
-                                            <segment title="First"/>
-                                            <segment title="Second"/>
-                                            <segment title=""/>
-                                        </segments>
-                                        <color key="tintColor" red="0.41176470590000003" green="0.2784313725" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ekM-hB-T5N">
+                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="cks-qo-0uu" secondAttribute="bottom" id="0KB-85-dDb"/>
-                                    <constraint firstItem="cks-qo-0uu" firstAttribute="height" secondItem="frq-mU-uay" secondAttribute="height" multiplier="0.5" id="Hdn-aC-eIM"/>
-                                    <constraint firstItem="ekM-hB-T5N" firstAttribute="height" secondItem="frq-mU-uay" secondAttribute="height" multiplier="0.5" id="Kik-iR-ZLn"/>
-                                    <constraint firstItem="cks-qo-0uu" firstAttribute="width" secondItem="frq-mU-uay" secondAttribute="width" id="O5B-8e-hco"/>
-                                    <constraint firstAttribute="height" constant="88" id="PmX-cp-w3T"/>
-                                    <constraint firstItem="cks-qo-0uu" firstAttribute="centerX" secondItem="frq-mU-uay" secondAttribute="centerX" id="aZt-9K-zdA"/>
-                                    <constraint firstItem="ekM-hB-T5N" firstAttribute="top" secondItem="frq-mU-uay" secondAttribute="top" id="nK1-eg-Wde"/>
-                                    <constraint firstItem="ekM-hB-T5N" firstAttribute="width" secondItem="frq-mU-uay" secondAttribute="width" id="uRf-Mf-U9X"/>
-                                    <constraint firstItem="ekM-hB-T5N" firstAttribute="centerX" secondItem="frq-mU-uay" secondAttribute="centerX" id="v6j-Jd-Kbn"/>
+                                    <constraint firstAttribute="height" constant="44" id="Vd4-NC-46b"/>
                                 </constraints>
-                            </view>
+                                <segments>
+                                    <segment title="My Channels"/>
+                                    <segment title="By Name"/>
+                                    <segment title="By Member"/>
+                                </segments>
+                                <color key="tintColor" red="0.41176470590000003" green="0.2784313725" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeSearchType" destination="g2H-4M-w0X" eventType="touchUpInside" id="6wM-Fb-PbN"/>
+                                </connections>
+                            </segmentedControl>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cks-qo-0uu">
+                                <rect key="frame" x="0.0" y="108" width="320" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="ZQe-YZ-qt2"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ECK-s9-rd3">
-                                <rect key="frame" x="0.0" y="152" width="320" height="328"/>
+                                <rect key="frame" x="0.0" y="164" width="320" height="316"/>
                                 <color key="backgroundColor" red="0.41176470590000003" green="0.2784313725" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelCell" id="n9Q-Pk-Ia8">
@@ -146,13 +138,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cks-qo-0uu" firstAttribute="centerX" secondItem="mjy-D0-y4m" secondAttribute="centerX" id="2PU-fE-GuP"/>
+                            <constraint firstItem="cks-qo-0uu" firstAttribute="top" secondItem="ekM-hB-T5N" secondAttribute="bottom" id="3uA-9V-0V5"/>
+                            <constraint firstItem="cks-qo-0uu" firstAttribute="width" secondItem="mjy-D0-y4m" secondAttribute="width" id="BaI-ja-5LJ"/>
                             <constraint firstItem="ECK-s9-rd3" firstAttribute="centerX" secondItem="mjy-D0-y4m" secondAttribute="centerX" id="EpP-mA-eK6"/>
-                            <constraint firstItem="frq-mU-uay" firstAttribute="width" secondItem="mjy-D0-y4m" secondAttribute="width" id="KMD-eB-ep6"/>
-                            <constraint firstItem="ECK-s9-rd3" firstAttribute="top" secondItem="frq-mU-uay" secondAttribute="bottom" id="Kdt-vj-tKC"/>
-                            <constraint firstItem="frq-mU-uay" firstAttribute="top" secondItem="1xo-Ai-lkT" secondAttribute="bottom" id="L8Y-Ra-D51"/>
+                            <constraint firstItem="ekM-hB-T5N" firstAttribute="width" secondItem="mjy-D0-y4m" secondAttribute="width" id="QDe-Oy-f3a"/>
                             <constraint firstItem="ECK-s9-rd3" firstAttribute="width" secondItem="mjy-D0-y4m" secondAttribute="width" id="TJ3-PG-aai"/>
+                            <constraint firstItem="ekM-hB-T5N" firstAttribute="top" secondItem="1xo-Ai-lkT" secondAttribute="bottom" id="Vla-24-xzn"/>
                             <constraint firstItem="vqx-Qw-vkt" firstAttribute="top" secondItem="ECK-s9-rd3" secondAttribute="bottom" id="WkY-dZ-DOc"/>
-                            <constraint firstItem="frq-mU-uay" firstAttribute="centerX" secondItem="mjy-D0-y4m" secondAttribute="centerX" id="s7O-k9-7A2"/>
+                            <constraint firstItem="ekM-hB-T5N" firstAttribute="centerX" secondItem="mjy-D0-y4m" secondAttribute="centerX" id="dBG-3E-d8C"/>
+                            <constraint firstItem="ECK-s9-rd3" firstAttribute="top" secondItem="cks-qo-0uu" secondAttribute="bottom" id="mPK-cx-F1k"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ld5-QA-kik">
@@ -164,8 +159,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="newChannelButton" destination="0W5-I4-gaF" id="WBr-yI-pZ9"/>
-                        <outlet property="searchAreaHeight" destination="PmX-cp-w3T" id="1aw-Yq-9Lf"/>
                         <outlet property="searchBar" destination="cks-qo-0uu" id="wrF-TV-j9c"/>
+                        <outlet property="searchBarHeight" destination="ZQe-YZ-qt2" id="FNp-aZ-AWX"/>
                         <outlet property="searchType" destination="ekM-hB-T5N" id="Y4u-sX-sGE"/>
                         <outlet property="tableView" destination="ECK-s9-rd3" id="GMq-cF-tXK"/>
                     </connections>
