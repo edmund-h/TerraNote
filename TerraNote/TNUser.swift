@@ -13,20 +13,24 @@ struct TNUser {
     let id: String
     var channels: [TNChannel]
     var blocklist: [TNUser]
+    var blockedBy: [TNUser]
     var notes: [TNNote.Short]
     
     var values: [String:Any]{
         var channels: [String:String] = [:]
         var blocklist: [String:String] = [:]
+        var blockedBy: [String:String] = [:]
         var notesDict: [String:[String:String]] = [:]
         self.channels.forEach({channels[$0.id] = $0.name})
         self.blocklist.forEach({blocklist[$0.id] = $0.email})
+        self.blockedBy.forEach({blockedBy[$0.id] = $0.email})
         self.notes.forEach({notesDict.merge($0.values, uniquingKeysWith: {(current, _) in current}) })
         return [
             Property.id.rawValue : self.id,
             Property.email.rawValue : self.email,
             Property.channels.rawValue : channels,
             Property.blocklist.rawValue: blocklist,
+            Property.blockedBy.rawValue: blockedBy,
             Property.notes.rawValue: notesDict
         ]
     }
@@ -45,31 +49,42 @@ struct TNUser {
     }
     
     static var currentUserFull: TNUser {
-        let user = TNUser(email: TNUser.currentUserEmail, id: TNUser.currentUserID, channels: [], blocklist: [], notes: [])
+        let user = TNUser(email: TNUser.currentUserEmail, id: TNUser.currentUserID, channels: [], blocklist: [], blockedBy: [], notes: [])
         return user
     }
     
-    static func makeWith(_ dict: [String: Any])-> TNUser? {
+    static func makeWith(_ dict: [String: Any], id: String)-> TNUser? {
         if let id = dict[Property.id.rawValue] as? String,
-            let emailValue = dict[Property.email.rawValue] as? String,
-            let email = emailValue.fromFBEmailFormat(){
-            var user = TNUser(email: email, id: id, channels: [], blocklist: [], notes:[])
+            let email = dict[Property.email.rawValue] as? String{
+            var user = TNUser(email: email, id: id, channels: [], blocklist: [], blockedBy: [], notes: [])
             if let channelDict = dict[Property.channels.rawValue] as? [String:Any],
-                let userDict = dict[Property.blocklist.rawValue] as? [String:Any] {
-                channelDict.forEach({id, value in
+                let blockedDict = dict[Property.blocklist.rawValue] as? [String:Any],
+            let blockedByDict = dict[Property.blockedBy.rawValue] as? [String:Any]{
+                channelDict.forEach({key, value in
                     if let name = value as? String {
-                        let channel = TNChannel(id: id, name: name, members: [], notes: [])
+                        let channel = TNChannel(id: key, name: name, members: [], notes: [])
                         user.channels.append(channel)
                     }
                 })
-                userDict.forEach({key, value in
-                    if let emailRaw = value as? String,
-                        let email = emailRaw.fromFBEmailFormat() {
-                        let blocked = TNUser(email: email, id: id, channels: [], blocklist: [], notes: [])
-                        user.blocklist.append(blocked)
+                blockedDict.forEach({key, value in
+                    if let blockedUser = keyValueMake(key: key, value: value) {
+                        user.blocklist.append(blockedUser)
+                    }
+                })
+                blockedByDict.forEach({key, value in
+                    if let blockingUser = keyValueMake(key: key, value: value) {
+                        user.blocklist.append(blockingUser)
                     }
                 })
             }
+            return user
+        }
+        return nil
+    }
+    
+    private static func keyValueMake(key: String, value: Any)-> TNUser? {
+        if let email = value as? String{
+            let user = TNUser(email: email, id: key, channels: [], blocklist: [], blockedBy: [], notes: [])
             return user
         }
         return nil
@@ -80,6 +95,7 @@ struct TNUser {
         case id = "id"
         case channels = "channels"
         case blocklist = "blocklist"
+        case blockedBy = "blockedBy"
         case notes = "notes"
     }
 }

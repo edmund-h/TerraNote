@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		880EEB881F8000B80020B012 /* TNChannelSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880EEB871F8000B80020B012 /* TNChannelSearchVC.swift */; };
+		883E7A671FFD521B0073C337 /* TNSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E7A661FFD521B0073C337 /* TNSettingsViewController.swift */; };
 		8848F1E61F84F2E000189458 /* TNObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848F1E51F84F2E000189458 /* TNObjects.swift */; };
 		885942121F67C46B003F105F /* TNSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885942111F67C46B003F105F /* TNSearchTableVC.swift */; };
 		88916C9B1F7FE93200F5D5A9 /* TNChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88916C9A1F7FE93200F5D5A9 /* TNChannelCellView.xib */; };
@@ -43,9 +44,8 @@
 		0118F498835A7061184082FB /* Pods_TerraNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0C961FF5C68A03B12C960F /* Pods-TerraNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.debug.xcconfig"; sourceTree = "<group>"; };
 		416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNote/Pods-TerraNote.release.xcconfig"; sourceTree = "<group>"; };
-		46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.release.xcconfig"; sourceTree = "<group>"; };
-		675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TerraNoteTests/Pods-TerraNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		880EEB871F8000B80020B012 /* TNChannelSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNChannelSearchVC.swift; sourceTree = "<group>"; };
+		883E7A661FFD521B0073C337 /* TNSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNSettingsViewController.swift; sourceTree = "<group>"; };
 		8848F1E51F84F2E000189458 /* TNObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNObjects.swift; sourceTree = "<group>"; };
 		885942111F67C46B003F105F /* TNSearchTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSearchTableVC.swift; sourceTree = "<group>"; };
 		88916C9A1F7FE93200F5D5A9 /* TNChannelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TNChannelCellView.xib; sourceTree = "<group>"; };
@@ -134,6 +134,7 @@
 				885942111F67C46B003F105F /* TNSearchTableVC.swift */,
 				88D0DBAF1F60910600F55603 /* TNNewNoteVC.swift */,
 				88F8EAF61F7E70F90061D863 /* TNLocationSearchVC.swift */,
+				883E7A661FFD521B0073C337 /* TNSettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -222,8 +223,6 @@
 			children = (
 				3A0C961FF5C68A03B12C960F /* Pods-TerraNote.debug.xcconfig */,
 				416CAF0AF47371643DD70C64 /* Pods-TerraNote.release.xcconfig */,
-				675C1522F6A536646C2DCF5B /* Pods-TerraNoteTests.debug.xcconfig */,
-				46F3DFC9B6AFC378D7A8C173 /* Pods-TerraNoteTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -379,6 +378,7 @@
 				88D0DB631F5F7C0F00F55603 /* AppDelegate.swift in Sources */,
 				88D0DBAE1F60827400F55603 /* TNViewFormatter.swift in Sources */,
 				88916C9F1F7FF31300F5D5A9 /* TNChannelCellView.swift in Sources */,
+				883E7A671FFD521B0073C337 /* TNSettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

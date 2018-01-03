@@ -37,7 +37,7 @@ class TNLocationSearchVC: UIViewController {
 extension TNLocationSearchVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let searchText = textField.text, searchText.characters.count > 4 {
+        if let searchText = textField.text, searchText.count > 4 {
             CoreLocClient.forwardGeocodeAutoCompletions(text: searchText, completion: { autoCompletions in
                 self.completions = autoCompletions
             })

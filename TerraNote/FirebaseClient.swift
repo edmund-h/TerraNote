@@ -149,22 +149,38 @@ class FirebaseClient {
     
     // MARK: Block Functions
     static func block(_ user: TNUser) {
-        currentUser.child(TNUser.Property.blocklist.rawValue).setValue(user.email.toFBEmailFormat(), forKey: user.id)
+        currentUser.child(TNUser.Property.blocklist.rawValue).setValue(user.email, forKey: user.id)
+        users.child(user.id).child(TNUser.Property.blockedBy.rawValue).setValue(TNUser.currentUserID, forKey: TNUser.currentUserEmail)
     }
     
     static func unblock(_ user: TNUser) {
         currentUser.child(TNUser.Property.blocklist.rawValue).child(user.id).removeValue()
+        users.child(user.id).child(TNUser.Property.blockedBy.rawValue).child(TNUser.currentUserID).removeValue()
     }
     
-    static func observeBlocklist(_ active: Bool){
-        if active{
-            currentUser.child(TNUser.Property.blocklist.rawValue).observe(.value, with: {snapshot in
-                guard let data = snapshot.value as? [String:String] else {return}
-                UserDefaults.standard.set(data, forKey: TNUser.Property.blocklist.rawValue)
+    static func getBlocklist(_ completion: @escaping ([TNUser])->()) {
+        currentUser.child(TNUser.Property.blocklist.rawValue).observeSingleEvent(of: .value, with: {snapshot in
+            var blockList: [TNUser] = []
+            guard let blockData = snapshot.value as? JSON else { completion([]); return}
+            blockData.forEach({ id, value in
+                if let email = value as? String {
+                    blockList.append(TNUser(email: email, id: id, channels: [], blocklist: [], blockedBy: [], notes: []))
+                }
             })
-        }else {
-            currentUser.child(TNUser.Property.blocklist.rawValue).removeAllObservers()
-        }
+            completion(blockList)
+        })
+    }
+    
+    static func checkIfBlocked(email: String, completion: @escaping (Bool)->()) {
+        // grab the whole current user so as to get both blocklists
+        currentUser.observeSingleEvent(of: .value, with: { snapshot in
+            guard let userData = snapshot.value as? JSON ,
+                let user = TNUser.makeWith(userData, id: TNUser.currentUserID) else {completion(true); return}
+            let blockedByCreator = user.blockedBy.contains(where: {$0.email == email})
+            let userBlockedCreator = user.blocklist.contains(where: {$0.email == email})
+            //call the completion with true if either the user or creator has been blocked (or both)
+            completion( blockedByCreator || userBlockedCreator)
+        })
     }
     
     // MARK: Filter Functions

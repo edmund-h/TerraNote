@@ -40,26 +40,26 @@ extension CLLocationCoordinate2D {
         return distCheck
     }
 }
-
-extension String {
-    func fromFBEmailFormat()->String? {
-        if let user = self.components(separatedBy: "@").first,
-            let domain = self.components(separatedBy: "@").last,
-            let suffix = domain.components(separatedBy: " ").last {
-            return user + "@" + domain + "." + suffix
-        }
-        return nil
-    }
-    
-    func toFBEmailFormat()->String? {
-        if let user = self.components(separatedBy: "@").first,
-            let domain = self.components(separatedBy: "@").last,
-            let suffix = domain.components(separatedBy: ".").last {
-            return user + "@" + domain + " " + suffix
-        }
-        return nil
-    }
-}
+//
+//extension String {
+//    func fromFBEmailFormat()->String? {
+//        if let user = self.components(separatedBy: "@").first,
+//            let domain = self.components(separatedBy: "@").last,
+//            let suffix = domain.components(separatedBy: " ").last {
+//            return user + "@" + domain + "." + suffix
+//        }
+//        return nil
+//    }
+//
+//    func toFBEmailFormat()->String? {
+//        if let user = self.components(separatedBy: "@").first,
+//            let domain = self.components(separatedBy: "@").last,
+//            let suffix = domain.components(separatedBy: ".").last {
+//            return user + "@" + domain + " " + suffix
+//        }
+//        return nil
+//    }
+//}
 
 extension UIView {
     func addAndConstrainTo(view: UIView) {

@@ -86,11 +86,11 @@ class TNChannelSearchVC: UIViewController {
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                UserDefaults.setValue(channelID, forKey: "currentChannel")
+                UserDefaults.standard.setValue(channelID, forKey: "currentChannel")
                 navigationController?.popToRootViewController(animated: true)
             }
         } else {
-            UserDefaults.setValue(nil, forKey: "currentChannel")
+            UserDefaults.standard.setValue(nil, forKey: "currentChannel")
             navigationController?.popToRootViewController(animated: true)
         }
     }

@@ -12,9 +12,4 @@ target 'TerraNote' do
   pod 'GoogleSignIn'
   pod 'FTPopOverMenu_Swift'
 
-  target 'TerraNoteTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end

@@ -40,13 +40,25 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
         contentField.textColor = UIColor.chocolate
         locField.placeholder = myLocationSignifier
         contentField.text = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         guard let noteID = noteShort?.id else {return}
         FirebaseClient.getNote(withID: noteID, completion: {note in
             if let note = note {
                 self.note = note
+                FirebaseClient.checkIfBlocked(email: note.creator, completion: {blocked in
+                    if blocked {
+                        let youreBlockedAlert = UIAlertController(title: "Access Denied", message: "You do not have access to this note.", preferredStyle: .alert)
+                        let dismissAction = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                                self.dismiss(animated: false, completion: {})
+                            })
+                        youreBlockedAlert.addAction(dismissAction)
+                        self.present(youreBlockedAlert, animated: true, completion: {})
+                    }
+                })
             }
         })
-        
     }
     
     @IBAction func hereBtnTouched() {

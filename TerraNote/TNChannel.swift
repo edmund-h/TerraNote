@@ -32,7 +32,7 @@ struct TNChannel {
             var channel = TNChannel(id: id, name: name,  members: [], notes: [])
             memberDict.forEach({key, value in
                 if let email = value as? String{
-                    let user = TNUser(email: email, id: key, channels: [], blocklist: [], notes: [] )
+                    let user = TNUser(email: email, id: key, channels: [], blocklist: [], blockedBy: [], notes: [] )
                     channel.members.append(user)
                 }
             })

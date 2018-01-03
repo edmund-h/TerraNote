@@ -36,8 +36,7 @@ class TNMapViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if GIDSignIn.sharedInstance().hasAuthInKeychain() == false {
-            let signIn = TNSignInController(nibName: "TNSignInController", bundle: Bundle.main)
-            self.present(signIn, animated: false, completion: nil)
+            presentSettingsController()
         } else {
             // ughh handle this error
         }
@@ -78,6 +77,10 @@ class TNMapViewController: UIViewController {
         }, cancel: {})
     }
     
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        presentSettingsController()
+    }
+    
     // MARK: Helper functions
     @objc func changeLocation(notification: Notification) {
         var location: String = ""
@@ -93,6 +96,10 @@ class TNMapViewController: UIViewController {
                 }
             }
         })
+    }
+    func presentSettingsController() {
+        let signIn = TNSignInController(nibName: "TNSignInController", bundle: Bundle.main)
+        self.present(signIn, animated: false, completion: nil)
     }
 }
 
