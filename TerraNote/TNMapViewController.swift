@@ -125,8 +125,8 @@ extension TNMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        
-        GeoFireClient.queryLocations(within: mapView.region, response: { (id, loc) in
+        let id = UserDefaults.standard.string(forKey: "currentChannel")
+        GeoFireClient.queryLocations(within: mapView.region, channel: id, response: { (id, loc) in
             let placemark = TNAnnotation(coordinate: loc.coordinate, noteID: id)
             for annotation in mapView.annotations{
                 guard annotation is TNAnnotation,

@@ -89,10 +89,11 @@ class TNNewNoteVC: UIViewController, UITextFieldDelegate {
         let date = ISO8601DateFormatter().string(from: Date())
         if let placemark = placemark, let location = placemark.location {
             let addr = placemark.address ?? "Unknown Location"
-            let note = TNNote(id: "nil", creator: TNUser.currentUserEmail, title: title, date: date, location: addr, content: content, channel: nil )
-            let id = FirebaseClient.pushNew(note: note)
+            var note = TNNote(id: "nil", creator: TNUser.currentUserEmail, title: title, date: date, location: addr, content: content, channel: nil )
+            // not having this in a closure kind of bothers me
+            note = FirebaseClient.pushNew(note: note)
             let coord = location.coordinate
-            GeoFireClient.addLocation(noteID: id, coordinate: coord)
+            GeoFireClient.addLocation(note: note, coordinate: coord)
         } else {
             // TODO: Handle error with alert
             print ("There was a problem getting your location.")

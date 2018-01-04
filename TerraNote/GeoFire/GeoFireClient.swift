@@ -13,31 +13,35 @@ final class GeoFireClient {
     
     private static var query: GFRegionQuery?
     
-    private class func geoReference(uid: String? = nil)->GeoFire {
+    private class func geoReference(channelID: String? = nil)->GeoFire {
+        // the id is a channel ID. the user's locations are basically their own "channel" consisting of the notes they have created so if no ID is given the note is placed in the user database
+        /// DO NOT CALL THIS FUNCTION WITH A USER ID
         let user = TNUser.currentUserID
         let locationPath = "locations"
-        let ref = Database.database().reference().child("users")
-        if let uid = uid {
-            return GeoFire(firebaseRef: ref.child(uid).child(locationPath))
+        let userRef = Database.database().reference().child("users")
+        let channelRef = Database.database().reference().child("channels")
+        if let id = channelID {
+            return GeoFire(firebaseRef: userRef.child(id).child(locationPath))
         } else {
-            return GeoFire(firebaseRef: ref.child(user).child(locationPath))
+            return GeoFire(firebaseRef: channelRef.child(user).child(locationPath))
         }
     }
     
-    class func addLocation(noteID id: String, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
-        let geo = geoReference()
+    // the weird collection of punctuation in the following function call is an optional closure with no parameters or outputs
+    class func addLocation(note: TNNote, coordinate: CLLocationCoordinate2D, completion:(()->())? = nil){
+        var geo = geoReference()
         let loc  = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        geo.setLocation(loc, forKey: id, withCompletionBlock:{ error in
-            NSLog("%@", "added location at (\(coordinate.latitude), \(coordinate.longitude) ")
-            if let error = error{ print (error.localizedDescription) }
-            if let completion = completion {completion()}
-        })
-        
+        geo.setLocation(loc, forKey: note.id)
+        //if note is in a channel, place a reference there as well so that other people in the channel can see the note
+        if let channelID = note.channel?.id {
+            geo = geoReference(channelID: channelID)
+            geo.setLocation(loc, forKey: note.id)
+        }
     }
     
-    class func queryLocations(within region: MKCoordinateRegion, user: String? = nil, response: @escaping (String, CLLocation)->()){
+    class func queryLocations(within region: MKCoordinateRegion, channel: String? = nil, response: @escaping (String, CLLocation)->()){
         //remove locations from map first!
-        let geo = geoReference(uid: user)
+        let geo = geoReference(channelID: channel)
         GeoFireClient.query = geo.query(with: region)
         guard let query = GeoFireClient.query else {return}
         query.observe(.keyEntered, with: { key, location in
