@@ -38,7 +38,7 @@ class TNMapViewController: UIViewController {
         if GIDSignIn.sharedInstance().hasAuthInKeychain() == false {
             presentSettingsController()
         } else {
-            // ughh handle this error
+            
         }
     }
     

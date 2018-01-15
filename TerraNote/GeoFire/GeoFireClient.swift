@@ -15,15 +15,15 @@ final class GeoFireClient {
     
     private class func geoReference(channelID: String? = nil)->GeoFire {
         // the id is a channel ID. the user's locations are basically their own "channel" consisting of the notes they have created so if no ID is given the note is placed in the user database
-        /// DO NOT CALL THIS FUNCTION WITH A USER ID
+        /// DO NOT CALL THIS FUNCTION WITH A USER ID, PASS NIL FOR USER'S NOTES
         let user = TNUser.currentUserID
         let locationPath = "locations"
         let userRef = Database.database().reference().child("users")
         let channelRef = Database.database().reference().child("channels")
         if let id = channelID {
-            return GeoFire(firebaseRef: userRef.child(id).child(locationPath))
+            return GeoFire(firebaseRef: channelRef.child(id).child(locationPath))
         } else {
-            return GeoFire(firebaseRef: channelRef.child(user).child(locationPath))
+            return GeoFire(firebaseRef: userRef.child(user).child(locationPath))
         }
     }
     
